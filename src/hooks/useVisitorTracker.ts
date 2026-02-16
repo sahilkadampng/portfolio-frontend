@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
-const API = 'http://localhost:5000/api';
+import { API_URL } from '../config/api';
 const TOKEN_KEY = 'raw_visitor_token';
 
 // Parse user-agent for device/browser/os info
@@ -61,7 +60,7 @@ export function useVisitorTracker() {
                 // Fetch real public IP (so localhost doesn't show ::1)
                 const clientIP = await getPublicIP();
 
-                const res = await fetch(`${API}/visitors/track`, {
+                const res = await fetch(`${API_URL}/visitors/track`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

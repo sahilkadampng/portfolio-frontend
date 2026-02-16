@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_URL } from '../config/api';
 
 export default function CTA() {
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ export default function CTA() {
         setSubmitting(true);
         setMessage('');
         try {
-            const res = await fetch('http://localhost:5000/api/emails', {
+            const res = await fetch(`${API_URL}/emails`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, source: 'cta' }),

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const API = 'http://localhost:5000/api';
+import { API_URL } from '../config/api';
 
 interface EmailEntry {
     _id: string;
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
     // Auth verify
     useEffect(() => {
         if (!token) { navigate('/login'); return; }
-        fetch(`${API}/auth/verify`, { headers: { Authorization: `Bearer ${token}` } })
+        fetch(`${API_URL}/auth/verify`, { headers: { Authorization: `Bearer ${token}` } })
             .then((r) => r.json())
             .then((data) => {
                 if (data.status !== 'success') { localStorage.removeItem('raw_token'); navigate('/login'); }
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
         setEmailLoading(true);
         try {
             const params = new URLSearchParams({ page: String(emailPage), limit: '15', status: emailFilter, search: emailSearch });
-            const res = await fetch(`${API}/emails?${params}`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await fetch(`${API_URL}/emails?${params}`, { headers: { Authorization: `Bearer ${token}` } });
             const data = await res.json();
             if (data.status === 'success') {
                 setEmails(data.data);
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
         setVisitorLoading(true);
         try {
             const params = new URLSearchParams({ page: String(visitorPage), limit: '20', search: visitorSearch });
-            const res = await fetch(`${API}/visitors?${params}`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await fetch(`${API_URL}/visitors?${params}`, { headers: { Authorization: `Bearer ${token}` } });
             const data = await res.json();
             if (data.status === 'success') {
                 setVisitors(data.data);
@@ -125,7 +125,7 @@ export default function AdminDashboard() {
         if (!token) return;
         setBlockedLoading(true);
         try {
-            const res = await fetch(`${API}/visitors/blocked`, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await fetch(`${API_URL}/visitors/blocked`, { headers: { Authorization: `Bearer ${token}` } });
             const data = await res.json();
             if (data.status === 'success') {
                 setBlocked(data.data);
@@ -141,24 +141,24 @@ export default function AdminDashboard() {
 
     // Actions
     const updateEmailStatus = async (id: string, status: string) => {
-        await fetch(`${API}/emails/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ status }) });
+        await fetch(`${API_URL}/emails/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ status }) });
         fetchEmails();
     };
 
     const deleteEmail = async (id: string) => {
         if (!confirm('Delete this email permanently?')) return;
-        await fetch(`${API}/emails/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+        await fetch(`${API_URL}/emails/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
         fetchEmails();
     };
 
     const toggleBlock = async (id: string) => {
-        await fetch(`${API}/visitors/blocked/${id}`, { method: 'PATCH', headers: { Authorization: `Bearer ${token}` } });
+        await fetch(`${API_URL}/visitors/blocked/${id}`, { method: 'PATCH', headers: { Authorization: `Bearer ${token}` } });
         fetchBlocked();
     };
 
     const deleteBlock = async (id: string) => {
         if (!confirm('Remove this block entry?')) return;
-        await fetch(`${API}/visitors/blocked/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+        await fetch(`${API_URL}/visitors/blocked/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
         fetchBlocked();
     };
 
