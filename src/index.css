@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=BBH+Bartle&family=Bebas+Neue&family=Vend+Sans:wght@634&display=swap');
+
+@import "tailwindcss";
+
+/* ✅ Set your global font */
+:root {
+    font-family: "Arimo", sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    background-color: #f4f6fb;
+}
+
+/* optional reset */
+body {
+    margin: 0;
+}

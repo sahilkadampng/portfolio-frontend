@@ -1,0 +1,156 @@
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
+const solutions = [
+    {
+        tag: 'API Layer',
+        tagColor: 'text-blue-600',
+        title: 'RESTful API Design',
+        desc: 'Structured, versioned REST endpoints with proper error handling, pagination, and consistent response schemas. Built for consumption by any client.',
+        features: ['Versioned Routes', 'Error Middleware', 'JSON Schema Validation'],
+    },
+    {
+        tag: 'Auth Layer',
+        tagColor: 'text-blue-600',
+        title: 'Authentication & Security',
+        desc: 'JWT-based auth flows with refresh tokens, role-based access control, and bcrypt password hashing. Security is foundational, not bolted on.',
+        features: ['JWT + Refresh Tokens', 'RBAC', 'bcrypt Hashing'],
+    },
+    {
+        tag: 'Data Layer',
+        tagColor: 'text-gray-500',
+        title: 'Database Architecture',
+        desc: 'Schema-first MongoDB design with Mongoose ODM — optimized indexes, population strategies, and aggregation pipelines for complex queries.',
+        features: ['Schema Validation', 'Indexed Queries', 'Aggregation Pipelines'],
+    },
+    {
+        tag: 'Integration Layer',
+        tagColor: 'text-gray-500',
+        title: 'Third-Party Integrations',
+        desc: 'Seamless integration with payment gateways, email services, cloud storage, and external APIs. Modular adapters for easy swapping.',
+        features: ['Payment APIs', 'Email Services', 'Cloud Storage'],
+    },
+    {
+        tag: 'DevOps Layer',
+        tagColor: 'text-blue-600',
+        title: 'Deployment & CI/CD',
+        desc: 'Production deployments with Git-based workflows. Environment management, build optimization, and continuous integration pipelines.',
+        features: ['Git Workflows', 'Env Management', 'Build Optimization'],
+    },
+    {
+        tag: 'Frontend Layer',
+        tagColor: 'text-gray-500',
+        title: 'UI & Client Applications',
+        desc: 'Modern React interfaces with Tailwind CSS. Component-driven architecture, responsive design, and optimized performance out of the box.',
+        features: ['React + TypeScript', 'Tailwind CSS', 'Responsive Design'],
+    },
+];
+
+const processSteps = [
+    { step: '01', title: 'Discovery', desc: 'Understand the problem, define requirements, and map out the system architecture before writing a single line of code.' },
+    { step: '02', title: 'Architecture', desc: 'Design database schemas, API contracts, and service boundaries. Plan for scale from the start.' },
+    { step: '03', title: 'Implementation', desc: 'Build incrementally with clean code, proper testing, and frequent commits. Ship features that work.' },
+    { step: '04', title: 'Deployment', desc: 'Production-ready deployment with monitoring, error tracking, and documentation. Built to maintain.' },
+];
+
+export default function Solutions() {
+    return (
+        <>
+            <Navbar />
+            <main className="bg-[#f4f6fb] min-h-screen">
+                {/* Hero */}
+                <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+                    <div className="max-w-6xl mx-auto text-center">
+                        <p className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6">
+                            ● Solutions :: Catalog ●
+                        </p>
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                            What I <span className="text-blue-600 italic">Build.</span>
+                        </h1>
+                        <p className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
+                            End-to-end solutions from database design to deployment — every layer
+                            engineered for reliability, security, and scale.
+                        </p>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap justify-center gap-3 mt-8">
+                            {['Full-Stack', 'API-First', 'Production-Ready'].map((tag) => (
+                                <span key={tag} className="px-4 py-1.5 border border-gray-300 rounded-md font-mono text-[10px] sm:text-xs tracking-wider text-gray-600 uppercase">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Solutions Grid */}
+                <section className="px-4 sm:px-6 pb-20">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {solutions.map((sol, i) => (
+                                <div key={sol.title} className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 text-left flex flex-col justify-between min-h-70 hover:shadow-md transition-shadow">
+                                    <div>
+                                        <div className="flex items-center justify-between mb-5">
+                                            <span className={`font-mono text-[10px] tracking-wider uppercase ${sol.tagColor}`}>
+                                                {sol.tag}
+                                            </span>
+                                            <span className="font-mono text-xs text-gray-300">{String(i + 1).padStart(2, '0')}</span>
+                                        </div>
+                                        <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 uppercase tracking-tight mb-3">
+                                            {sol.title}
+                                        </h3>
+                                        <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                                            {sol.desc}
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {sol.features.map((f) => (
+                                            <span key={f} className="px-2.5 py-1 border border-gray-100 rounded-md font-mono text-[10px] tracking-wider text-gray-500 uppercase">
+                                                {f}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Process */}
+                <section className="px-4 sm:px-6 pb-20">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-4">
+                                Process :: Pipeline
+                            </p>
+                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
+                                How It <span className="text-blue-600 italic">Ships.</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            {processSteps.map((s) => (
+                                <div key={s.step} className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-md transition-shadow">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <span className="w-10 h-10 rounded-lg bg-[#f4f6fb] border border-gray-200 flex items-center justify-center font-mono text-sm font-bold text-gray-400">
+                                            {s.step}
+                                        </span>
+                                        <h3 className="text-lg font-extrabold text-gray-900 uppercase tracking-tight">{s.title}</h3>
+                                    </div>
+                                    <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Divider */}
+                        <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
+                        <p className="mt-8 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-blue-600 uppercase">
+                            Every layer. Production grade.
+                        </p>
+                    </div>
+                </section>
+            </main>
+            <Footer />
+        </>
+    );
+}
