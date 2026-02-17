@@ -81,9 +81,9 @@ export default function Skills() {
                     transition={{ duration: 0.7, delay: 0.1 }}
                     className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
                 >
-                    Technical Skills.
+                    Technical
                     <br />
-                    <span className="text-blue-600 italic"></span>
+                    <span className="text-blue-600 italic">Skills...</span>
                 </motion.h2>
 
                 {/* Description */}
