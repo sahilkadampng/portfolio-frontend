@@ -9,7 +9,7 @@ export default function Skills() {
             skills: [
                 { name: 'JavaScript', level: 'Intermediate' },
                 { name: 'TypeScript', level: 'Basic' },
-                { name: 'Node.js', level: 'Basic' },
+                { name: 'Node.js', level: 'Intermediate' },
                 { name: 'Python', level: 'Basic' },
             ],
         },
@@ -19,7 +19,7 @@ export default function Skills() {
             title: 'Frameworks & Libraries',
             skills: [
                 { name: 'React', level: 'Basic' },
-                { name: 'Express.js', level: 'Basic' },
+                { name: 'Express.js', level: 'Intermediate' },
                 // { name: 'Next.js', level: 'Not started' },
                 { name: 'Tailwind CSS', level: 'Intermediate' },
             ],
@@ -83,7 +83,7 @@ export default function Skills() {
                 >
                     Technical Skills.
                     <br />
-                    <span className="text-blue-600 italic">Battle Tested.</span>
+                    <span className="text-blue-600 italic"></span>
                 </motion.h2>
 
                 {/* Description */}

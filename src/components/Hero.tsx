@@ -73,35 +73,24 @@ export default function Hero() {
 
                 <div className="mt-6 relative z-10 flex justify-center">
                 </div>
-
-
-                {/* Subtext */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="h-32"
-                >
-                    <p className="font-vend text-[19px] text-black max-w-3xl mx-auto bg-white/20 backdrop-blur-3xl">
-                        Design, secure, and deploy scalable SaaS APPs
-                    </p>
-                </motion.div>
-
+                
                 {/* Glass card */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
-                    className="relative max-w-2xl mx-auto p-4 sm:p-8
-backdrop-blur-sm
-border border-white/10
-rounded-sm"
-                >
+                    className="
+                relative max-w-2xl mx-auto p-4 sm:p-8
+                rounded-2xl
+                bg-white/90
+                backdrop-blur-2xl
+                border border-white/10 mt-10
+                ">
                     <p className="text-gray-800">
-                        RAW design and engineer the control layer behind seamless digital experiences, ensuring every project is robust, scalable, and polished.
+                        RAW design and engineer the control layer behind seamless digital
+                        experiences, ensuring every project is robust, scalable, and polished.
                     </p>
                 </motion.div>
-
                 {/* Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -109,11 +98,16 @@ rounded-sm"
                     transition={{ duration: 0.6, delay: 0.6 }}
                     className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8"
                 >
-                    <button className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-lg cursor-pointer">
-                        Request Access
+                    <button
+                        onClick={() =>
+                            document.getElementById("CTA")?.scrollIntoView({ behavior: "smooth" })
+                        }
+                        className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-lg cursor-pointer"
+                    >
+                        Get in touch
                     </button>
-                    <button className="px-8 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 hover:bg-gray-100 transition cursor-pointer">
-                        View Documentation
+                    <button onClick={() => window.location.href = '/infrastructure'} className="px-8 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 hover:bg-gray-100 transition cursor-pointer">
+                        View infrastructure
                     </button>
                 </motion.div>
             </motion.div>

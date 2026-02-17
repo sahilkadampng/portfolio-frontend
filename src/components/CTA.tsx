@@ -31,7 +31,8 @@ export default function CTA() {
     };
 
     return (
-        <section className="w-full bg-[#f4f6fb] py-16 md:py-24 px-4 flex items-center justify-center -mt-36">
+        <section id="CTA" className="w-full bg-[#f4f6fb] py-16 md:py-24 px-4 flex items-center justify-center scroll-mt-32
+">
             <motion.div
                 initial={{ opacity: 0, y: 60, scale: 0.97 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -130,7 +131,7 @@ export default function CTA() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    href="#"
+                    href="/docs"
                     className="mt-5 text-[#3b5bdb] text-sm font-medium font-arimo hover:underline flex items-center gap-1 transition"
                 >
                     Explore Documentation
