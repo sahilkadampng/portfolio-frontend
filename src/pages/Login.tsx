@@ -57,7 +57,7 @@ export default function Login() {
                             transition={{ duration: 0.7, delay: 0.1 }}
                             className="text-4xl sm:text-5xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
                         >
-                            Secure <span className="text-blue-600 italic">Login.</span>
+                            Secure <span className="text-blue-600">Login.</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
