@@ -78,7 +78,7 @@ export default function Login() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="admin@raw.dev"
+                                    placeholder="Email"
                                     required
                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-[#f4f6fb] text-sm text-gray-800 placeholder-gray-400 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition font-arimo"
                                 />
