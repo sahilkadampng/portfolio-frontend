@@ -79,10 +79,10 @@ export default function Login() {
                         {/* Status bar */}
                         <div className="flex items-center justify-between mb-8">
                             <button
-                                onClick={() => window.history.back()}
+                                onClick={() => window.location.href = '/'}
                                 className="text-black text-lg font-bold hover:text-gray-700 transition-colors"
                             >
-                                ⬅
+                                back
                             </button>
                             <span className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-green-500" />
