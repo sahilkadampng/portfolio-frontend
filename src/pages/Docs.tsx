@@ -1,13 +1,115 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-type SectionKey = 'getting-started' | 'api-reference' | 'auth' | 'database' | 'deployment';
+type SectionKey = 'getting-started' | 'api-reference' | 'auth' | 'database' | 'deployment' | 'rate-limiting';
 
 interface DocSection {
     title: string;
     tag: string;
     content: { heading: string; code?: string; text: string }[];
+}
+
+// Terminal panel component — renders code blocks in a macOS-style terminal window
+function TerminalPanel({ title, code }: { title: string; code: string }) {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <div className="rounded-xl overflow-hidden border border-gray-700/50 shadow-xl mb-4 bg-[#0d1117]">
+            {/* Terminal title bar */}
+            <div className="flex items-center justify-between px-4 py-2.5 bg-[#ffffff] border-b border-gray-700/50">
+                <div className="flex items-center gap-2">
+                    {/* macOS-style traffic light buttons */}
+                    <span className="w-3 h-3 rounded-full bg-[#ff5f57] shadow-inner" />
+                    <span className="w-3 h-3 rounded-full bg-[#febc2e] shadow-inner" />
+                    <span className="w-3 h-3 rounded-full bg-[#28c840] shadow-inner" />
+                    <span className="ml-3 font-mono text-[11px] text-gray-500 tracking-wide">{title}</span>
+                </div>
+                <button
+                    onClick={handleCopy}
+                    className="px-2.5 py-1 rounded-md text-[10px] font-mono tracking-wider uppercase transition cursor-pointer
+                        text-gray-400 hover:text-white hover:bg-gray-700/50"
+                >
+                    {copied ? '✓ Copied' : 'Copy'}
+                </button>
+            </div>
+            {/* Terminal content with line numbers */}
+            <div className="p-4 overflow-x-auto">
+                <div className="flex text-left">
+                    {/* Line Numbers */}
+                    <div className="select-none pr-4 border-r border-gray-700/30 mr-4 flex flex-col">
+                        {code.split('\n').map((_, i) => (
+                            <div
+                                key={i}
+                                className="text-right font-mono text-[11px] leading-6 text-gray-600 min-w-8"
+                            >
+                                {i + 1}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Code Content */}
+                    <pre className="flex-1 m-0 p-0">
+                        <code className="text-[13px] font-mono leading-6 text-gray-300 whitespace-pre wrap-break-words">
+                            {code.split('\n').map((line, i) => {
+                                // Highlight comments
+                                if (/^\s*(#|\/\/)/.test(line)) {
+                                    return (
+                                        <div key={i} className="text-gray-500 italic">
+                                            {line}
+                                        </div>
+                                    );
+                                }
+                                // Highlight keywords/functions (optional)
+                                const keywords = ['import', 'export', 'const', 'let', 'async', 'await', 'function', 'return', 'from', 'if', 'try', 'catch'];
+                                const functions = ['app', 'res', 'next', 'jwt', 'Admin'];
+                                let highlighted = line;
+                                // Wrap keywords in cyan
+                                keywords.forEach(k => {
+                                    const regex = new RegExp(`\\b${k}\\b`, 'g');
+                                    highlighted = highlighted.replace(regex, `%${k}%`);
+                                });
+                                // Wrap functions in orange
+                                functions.forEach(f => {
+                                    const regex = new RegExp(`\\b${f}\\b`, 'g');
+                                    highlighted = highlighted.replace(regex, `#${f}#`);
+                                });
+                                // Split by placeholders and render
+                                const parts = highlighted.split(/(%|#)/);
+                                return (
+                                    <div
+                                        key={i}
+                                        className="hover:bg-gray-800/30 -mx-2 px-2 rounded transition"
+                                    >
+                                        {parts.map((p, idx) => {
+                                            if (p.startsWith('%')) return <span key={idx} className="text-cyan-400">{p.slice(1)}</span>;
+                                            if (p.startsWith('#')) return <span key={idx} className="text-orange-400">{p.slice(1)}</span>;
+                                            return <span key={idx}>{p}</span>;
+                                        })}
+                                    </div>
+                                );
+                            })}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            {/* Terminal status bar */}
+            <div className="px-4 py-1.5 bg-[#ffffff] border-t border-gray-700/50 flex items-center justify-between">
+                <span className="font-mono text-[10px] text-gray-600">bash</span>
+                <div className="flex items-center gap-3">
+                    <span className="font-mono text-[10px] text-gray-600">{code.split('\n').length} lines</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                </div>
+            </div>
+        </div>
+    );
 }
 
 const sections: Record<SectionKey, DocSection> = {
@@ -162,6 +264,92 @@ const paginate = async (Model, query, options) => {
             },
         ],
     },
+    'rate-limiting': {
+        title: 'Rate Limiting',
+        tag: 'Security',
+        content: [
+            {
+                heading: 'Rate Limiter Configuration',
+                code: `import rateLimit from 'express-rate-limit';
+
+// ── PUBLIC LIMITER ──────────────────────────
+// Homepage, fetch products, visitor tracking
+// 100 requests per 1-minute window per IP
+export const publicLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: 'error',
+    message: 'Too many requests, please try again later.'
+  }
+});
+
+// ── AUTH LIMITER ────────────────────────────
+// Login, OTP, password reset (sensitive)
+// 10 requests per 1-minute window per IP
+export const authLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: 'error',
+    message: 'Too many requests, please try again later.'
+  }
+});
+
+// ── ADMIN LIMITER ───────────────────────────
+// Dashboard actions, CRUD operations
+// 20 requests per 1-minute window per IP
+export const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: 'error',
+    message: 'Too many requests, please try again later.'
+  }
+});`,
+                text: 'Three separate rate limiters for different endpoint tiers. Each returns a 429 status with a custom error message when exceeded.',
+            },
+            {
+                heading: 'Applying Limiters to Routes',
+                code: `import express from 'express';
+import { checkBlocked, publicLimiter, authLimiter, adminLimiter } from './middleware/rateLimiter.js';
+
+const app = express();
+
+// Block check runs on all routes first
+app.use(checkBlocked);
+
+// Apply endpoint-specific rate limiters
+app.use('/api/auth', authLimiter, authRoutes);
+app.use('/api/emails', publicLimiter, emailRoutes);
+app.use('/api/visitors', publicLimiter, visitorRoutes);
+app.use('/api/admin', adminLimiter, adminRoutes);`,
+                text: 'Mount limiters per route group. Blocked IPs are checked first, then the appropriate rate limiter is applied.',
+            },
+            {
+                heading: 'Rate Limit Summary',
+                code: `// ┌──────────────────────────┬──────────────┬────────┐
+// │  Endpoint Type           │ Max Requests │ Window │
+// ├──────────────────────────┼──────────────┼────────┤
+// │  Public (homepage, etc.) │ 100          │ 1 min  │
+// │  Auth (login, OTP)       │ 10           │ 1 min  │
+// │  Admin (dashboard)       │ 20           │ 1 min  │
+// └──────────────────────────┴──────────────┴────────┘
+//
+// Exceeding limits returns HTTP 429:
+// { "status": "error", "message": "Too many requests, please try again later." }
+//
+// Auth abuse auto-blocks the offending IP.`,
+                text: 'Rate limits are enforced per IP using express-rate-limit. Auth abuse triggers automatic IP blocking via the BlockedIP model.',
+            },
+        ],
+    },
     deployment: {
         title: 'Deployment',
         tag: 'DevOps',
@@ -210,6 +398,7 @@ const sidebarItems: { key: SectionKey; label: string }[] = [
     { key: 'api-reference', label: 'API Reference' },
     { key: 'auth', label: 'Authentication' },
     { key: 'database', label: 'Database' },
+    { key: 'rate-limiting', label: 'Rate Limiting' },
     { key: 'deployment', label: 'Deployment' },
 ];
 
@@ -225,15 +414,30 @@ export default function Docs() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     {/* Header */}
                     <div className="text-center mb-12">
-                        <p className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6">
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6"
+                        >
                             ● Documentation :: Reference ●
-                        </p>
-                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                        </motion.p>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.1 }}
+                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                        >
                             API <span className="text-blue-600 italic">Docs.</span>
-                        </h1>
-                        <p className="mt-4 text-gray-500 text-base sm:text-lg max-w-xl mx-auto">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="mt-4 text-gray-500 text-base sm:text-lg max-w-xl mx-auto"
+                        >
                             Everything you need to understand, integrate, and deploy.
-                        </p>
+                        </motion.p>
                     </div>
 
                     {/* Mobile sidebar toggle */}
@@ -247,7 +451,12 @@ export default function Docs() {
 
                     <div className="flex gap-6">
                         {/* Sidebar */}
-                        <aside className={`${sidebarOpen ? 'block' : 'hidden'} md:block w-full md:w-56 shrink-0`}>
+                        <motion.aside
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className={`${sidebarOpen ? 'block' : 'hidden'} md:block w-full md:w-56 shrink-0`}
+                        >
                             <div className="bg-white border border-gray-200 rounded-xl p-4 sticky top-28">
                                 <p className="font-mono text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-4 px-2">
                                     Navigation
@@ -257,54 +466,79 @@ export default function Docs() {
                                         <button
                                             key={item.key}
                                             onClick={() => { setActive(item.key); setSidebarOpen(false); }}
-                                            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-arimo transition-colors cursor-pointer ${
-                                                active === item.key
+                                            className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-arimo transition-colors cursor-pointer ${active === item.key
                                                     ? 'bg-blue-50 text-blue-600 font-semibold'
                                                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                                            }`}
+                                                }`}
                                         >
                                             {item.label}
                                         </button>
                                     ))}
                                 </nav>
+
+                                {/* Terminal-style status in sidebar */}
+                                <div className="mt-6 bg-[#0d1117] rounded-lg p-3 border border-gray-700/30">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                        <span className="font-mono text-[10px] text-green-400">SYSTEM ONLINE</span>
+                                    </div>
+                                    <p className="font-mono text-[9px] text-gray-500 leading-relaxed">
+                                        API v2.4 :: Express.js<br />
+                                        Rate Limited :: Active<br />
+                                        Last updated: Feb 2026
+                                    </p>
+                                </div>
                             </div>
-                        </aside>
+                        </motion.aside>
 
                         {/* Content */}
                         <div className="flex-1 min-w-0">
-                            <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-10">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <span className="px-3 py-1 bg-blue-50 border border-blue-200 rounded-md font-mono text-[10px] tracking-wider text-blue-600 uppercase">
-                                        {section.tag}
-                                    </span>
-                                    <span className="font-mono text-[10px] tracking-wider text-gray-400 uppercase">
-                                        Last updated: Feb 2026
-                                    </span>
-                                </div>
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={active}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-10"
+                                >
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <span className="px-3 py-1 bg-blue-50 border border-blue-200 rounded-md font-mono text-[10px] tracking-wider text-blue-600 uppercase">
+                                            {section.tag}
+                                        </span>
+                                        <span className="font-mono text-[10px] tracking-wider text-gray-400 uppercase">
+                                            Last updated: Feb 2026
+                                        </span>
+                                    </div>
 
-                                <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 uppercase tracking-tight mb-8">
-                                    {section.title}
-                                </h2>
+                                    <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 uppercase tracking-tight mb-8">
+                                        {section.title}
+                                    </h2>
 
-                                <div className="space-y-10">
-                                    {section.content.map((block, i) => (
-                                        <div key={i}>
-                                            <h3 className="text-lg font-bold text-gray-900 mb-3">{block.heading}</h3>
-                                            {block.code && (
-                                                <div className="bg-[#1e1e2e] rounded-lg p-5 mb-4 overflow-x-auto">
-                                                    <pre className="text-sm font-mono text-gray-300 leading-relaxed whitespace-pre">
-                                                        {block.code}
-                                                    </pre>
-                                                </div>
-                                            )}
-                                            <p className="text-gray-500 text-sm leading-relaxed">{block.text}</p>
-                                            {i < section.content.length - 1 && (
-                                                <div className="mt-8 h-px bg-gray-100" />
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                    <div className="space-y-10">
+                                        {section.content.map((block, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ duration: 0.4, delay: i * 0.1 }}
+                                            >
+                                                <h3 className="text-lg font-bold text-gray-900 mb-3">{block.heading}</h3>
+                                                {block.code && (
+                                                    <TerminalPanel
+                                                        title={`${section.title.toLowerCase().replace(/\s+/g, '-')} — ${block.heading.toLowerCase()}`}
+                                                        code={block.code}
+                                                    />
+                                                )}
+                                                <p className="text-gray-500 text-sm leading-relaxed">{block.text}</p>
+                                                {i < section.content.length - 1 && (
+                                                    <div className="mt-8 h-px bg-gray-100" />
+                                                )}
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
 
                             {/* Prev / Next nav */}
                             <div className="mt-6 flex justify-between">

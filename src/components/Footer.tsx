@@ -3,12 +3,12 @@ import { FaXTwitter, FaGithub, FaLinkedinIn } from 'react-icons/fa6';
 
 const socialLinks = [
     { icon: FaXTwitter, label: 'Twitter / X', href: '#' },
-    { icon: FaGithub, label: 'GitHub', href: '#' },
+    { icon: FaGithub, label: 'GitHub', href: 'https://github.com/sahilkadampng' },
     { icon: FaLinkedinIn, label: 'LinkedIn', href: '#' },
 ];
 
 const platformLinks = [
-    { label: 'Infrastructure', to: '/' },
+    { label: 'Infrastructure', to: '/infrastructure' },
     { label: 'Solutions', to: '/solutions' },
     { label: 'Docs', to: '/docs' },
     { label: 'Login', to: '/login' },

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../config/api';
 
@@ -42,21 +43,47 @@ export default function Login() {
                 <div className="w-full max-w-md">
                     {/* Header */}
                     <div className="text-center mb-10">
-                        <p className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-4">
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-4"
+                        >
                             ● Admin :: Access ●
-                        </p>
-                        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                        </motion.p>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.1 }}
+                            className="text-4xl sm:text-5xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                        >
                             Secure <span className="text-blue-600 italic">Login.</span>
-                        </h1>
-                        <p className="mt-3 text-gray-500 text-sm font-arimo">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="mt-3 text-gray-500 text-sm font-arimo"
+                        >
                             Authorized personnel only. All access is logged and monitored.
-                        </p>
+                        </motion.p>
                     </div>
 
                     {/* Login card */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-8 sm:p-10 shadow-sm">
+                    <motion.div
+                        initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="bg-white border border-gray-200 rounded-xl p-8 sm:p-10 shadow-sm"
+                    >
                         {/* Status bar */}
                         <div className="flex items-center justify-between mb-8">
+                            <button
+                                onClick={() => window.history.back()}
+                                className="text-black text-lg font-bold hover:text-gray-700 transition-colors"
+                            >
+                                ⬅
+                            </button>
                             <span className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-green-500" />
                                 <span className="font-mono text-[10px] tracking-wider text-gray-400 uppercase">
@@ -67,7 +94,6 @@ export default function Login() {
                                 v2.4
                             </span>
                         </div>
-
                         <form onSubmit={handleSubmit} className="space-y-5">
                             {/* Email */}
                             <div>
@@ -143,12 +169,17 @@ export default function Login() {
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Bottom text */}
-                    <p className="mt-6 text-center font-mono text-[10px] tracking-[0.2em] text-gray-400 uppercase">
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                        className="mt-6 text-center font-mono text-[10px] tracking-[0.2em] text-gray-400 uppercase"
+                    >
                         Protected by RAW
-                    </p>
+                    </motion.p>
                 </div>
             </main>
         </>

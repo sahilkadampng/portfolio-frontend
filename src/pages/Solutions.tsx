@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -61,25 +62,45 @@ export default function Solutions() {
                 {/* Hero */}
                 <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
                     <div className="max-w-6xl mx-auto text-center">
-                        <p className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6">
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6"
+                        >
                             ● Solutions :: Catalog ●
-                        </p>
-                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                        </motion.p>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.1 }}
+                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                        >
                             What I <span className="text-blue-600 italic">Build.</span>
-                        </h1>
-                        <p className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto"
+                        >
                             End-to-end solutions from database design to deployment — every layer
                             engineered for reliability, security, and scale.
-                        </p>
+                        </motion.p>
 
                         {/* Tags */}
-                        <div className="flex flex-wrap justify-center gap-3 mt-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className="flex flex-wrap justify-center gap-3 mt-8"
+                        >
                             {['Full-Stack', 'API-First', 'Production-Ready'].map((tag) => (
                                 <span key={tag} className="px-4 py-1.5 border border-gray-300 rounded-md font-mono text-[10px] sm:text-xs tracking-wider text-gray-600 uppercase">
                                     {tag}
                                 </span>
                             ))}
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
 
@@ -88,7 +109,14 @@ export default function Solutions() {
                     <div className="max-w-6xl mx-auto">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {solutions.map((sol, i) => (
-                                <div key={sol.title} className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 text-left flex flex-col justify-between min-h-70 hover:shadow-md transition-shadow">
+                                <motion.div
+                                    key={sol.title}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 text-left flex flex-col justify-between min-h-70 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                >
                                     <div>
                                         <div className="flex items-center justify-between mb-5">
                                             <span className={`font-mono text-[10px] tracking-wider uppercase ${sol.tagColor}`}>
@@ -110,7 +138,7 @@ export default function Solutions() {
                                             </span>
                                         ))}
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
@@ -129,8 +157,15 @@ export default function Solutions() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            {processSteps.map((s) => (
-                                <div key={s.step} className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-md transition-shadow">
+                            {processSteps.map((s, i) => (
+                                <motion.div
+                                    key={s.step}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                >
                                     <div className="flex items-center gap-4 mb-4">
                                         <span className="w-10 h-10 rounded-lg bg-[#f4f6fb] border border-gray-200 flex items-center justify-center font-mono text-sm font-bold text-gray-400">
                                             {s.step}
@@ -138,7 +173,7 @@ export default function Solutions() {
                                         <h3 className="text-lg font-extrabold text-gray-900 uppercase tracking-tight">{s.title}</h3>
                                     </div>
                                     <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 

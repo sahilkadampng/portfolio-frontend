@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -23,21 +24,41 @@ export default function About() {
                 {/* Hero section */}
                 <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
                     <div className="max-w-6xl mx-auto text-center">
-                        <p className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6">
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6"
+                        >
                             ● About :: Overview ●
-                        </p>
-                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                        </motion.p>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.1 }}
+                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                        >
                             The Developer
                             <br />
                             <span className="text-blue-600 italic">Behind RAW.</span>
-                        </h1>
-                        <p className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto"
+                        >
                             19-year-old backend developer from India — building scalable systems,
                             clean APIs, and production-grade infrastructure from the ground up.
-                        </p>
+                        </motion.p>
 
                         {/* Stats */}
-                        <div className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
+                        >
                             {[
                                 { value: '19', label: 'Years Old' },
                                 { value: 'India', label: 'Location' },
@@ -51,13 +72,19 @@ export default function About() {
                                     </p>
                                 </div>
                             ))}
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
 
                 {/* Bio card */}
                 <section className="px-4 sm:px-6 pb-16">
-                    <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-xl p-8 sm:p-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-xl p-8 sm:p-12"
+                    >
                         <div className="flex items-center justify-between mb-6">
                             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase">
                                 Profile :: Summary
@@ -86,7 +113,7 @@ export default function About() {
                                 </span>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
                 </section>
 
                 {/* Timeline */}
@@ -103,7 +130,14 @@ export default function About() {
 
                         <div className="space-y-6">
                             {timeline.map((item, i) => (
-                                <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 flex gap-6 items-start hover:shadow-md transition-shadow">
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 flex gap-6 items-start hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                >
                                     <div className="flex flex-col items-center shrink-0">
                                         <span className={`w-3 h-3 rounded-full ${i === timeline.length - 1 ? 'bg-blue-600' : 'bg-gray-300'}`} />
                                         {i < timeline.length - 1 && <span className="w-px h-full bg-gray-200 mt-1" />}
@@ -113,7 +147,7 @@ export default function About() {
                                         <h3 className="text-lg font-extrabold text-gray-900 tracking-tight mt-1 mb-2">{item.title}</h3>
                                         <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
@@ -133,13 +167,20 @@ export default function About() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             {values.map((v, i) => (
-                                <div key={v.label} className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-md transition-shadow">
+                                <motion.div
+                                    key={v.label}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                >
                                     <div className="flex items-center justify-between mb-4">
                                         <span className="font-mono text-[10px] tracking-wider text-blue-600 uppercase">{v.label}</span>
                                         <span className="font-mono text-xs text-gray-300">{String(i + 1).padStart(2, '0')}</span>
                                     </div>
                                     <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 

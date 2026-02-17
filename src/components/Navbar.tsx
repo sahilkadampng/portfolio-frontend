@@ -16,18 +16,23 @@ export default function Navbar() {
                 {/* CENTER → MENU (desktop) */}
                 <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 gap-8">
                     <li>
-                        <Link to="/about" className="text-black hover:text-white transition-colors">
+                        <Link to="/about" className="text-black hover:text-gray-500 transition-colors">
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link to="/solutions" className="text-black hover:text-white transition-colors">
+                        <Link to="/solutions" className="text-black hover:text-gray-500 transition-colors">
                             Solutions
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs" className="text-black hover:text-white transition-colors">
+                        <Link to="/docs" className="text-black hover:text-gray-500 transition-colors">
                             Docs
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/infrastructure" className="text-black hover:text-gray-500 transition-colors">
+                            Infrastructure
                         </Link>
                     </li>
                 </ul>
@@ -68,6 +73,11 @@ export default function Navbar() {
                         <li>
                             <Link to="/docs" className="text-black hover:text-gray-600 transition-colors" onClick={() => setMenuOpen(false)}>
                                 Docs
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/infrastructure" className="text-black hover:text-gray-600 transition-colors" onClick={() => setMenuOpen(false)}>
+                                Infrastructure
                             </Link>
                         </li>
                         <li>

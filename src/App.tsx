@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Solutions from './pages/Solutions'
 import Docs from './pages/Docs'
+import Infrastructure from './pages/Infrastructure'
 import Login from './pages/Login'
 import AdminDashboard from './pages/AdminDashboard'
 import { useVisitorTracker } from './hooks/useVisitorTracker'
@@ -17,6 +18,7 @@ function AppRoutes() {
             <Route path="/about" element={<About />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/docs" element={<Docs />} />
+            <Route path="/infrastructure" element={<Infrastructure />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<AdminDashboard />} />
         </Routes>

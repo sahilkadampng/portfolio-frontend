@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { API_URL } from '../config/api';
 
 export default function CTA() {
@@ -31,19 +32,43 @@ export default function CTA() {
 
     return (
         <section className="w-full bg-[#f4f6fb] py-16 md:py-24 px-4 flex items-center justify-center -mt-36">
-            <div className="w-full max-w-3xl bg-[#eceef4]/40 rounded-3xl border border-gray-200/60 shadow-sm px-6 sm:px-12 md:px-16 py-14 md:py-20 flex flex-col items-center text-center">
+            <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="w-full max-w-3xl bg-[#eceef4]/40 rounded-3xl border border-gray-200/60 shadow-sm px-6 sm:px-12 md:px-16 py-14 md:py-20 flex flex-col items-center text-center"
+            >
                 {/* Heading */}
-                <h2 className="font-extrabold text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight text-gray-900 uppercase">
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="font-extrabold text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight text-gray-900 uppercase"
+                >
                     build empire
-                </h2>
-                <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight text-[#3b5bdb] uppercase">
+                </motion.h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight text-[#3b5bdb] uppercase"
+                >
                     With Confidence.
-                </h2>
+                </motion.h2>
 
                 {/* Subtitle */}
-                <p className="mt-5 text-gray-500 text-base sm:text-lg font-arimo max-w-md">
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="mt-5 text-gray-500 text-base sm:text-lg font-arimo max-w-md"
+                >
                     Step into your power and build your empire with unwavering confidence.
-                </p>
+                </motion.p>
 
                 {/* Feature badges */}
                 {/* <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-mono text-gray-700 tracking-wide">
@@ -62,7 +87,13 @@ export default function CTA() {
                 </div> */}
 
                 {/* Email input + button */}
-                <div className="mt-10 flex flex-col sm:flex-row items-center gap-3 w-full max-w-lg">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="mt-10 flex flex-col sm:flex-row items-center gap-3 w-full max-w-lg"
+                >
                     <input
                         type="email"
                         placeholder="Enter work email"
@@ -84,7 +115,7 @@ export default function CTA() {
                             'Get in Touch'
                         )}
                     </button>
-                </div>
+                </motion.div>
 
                 {/* Status message */}
                 {message && (
@@ -94,13 +125,17 @@ export default function CTA() {
                 )}
 
                 {/* Explore link */}
-                <a
+                <motion.a
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
                     href="#"
                     className="mt-5 text-[#3b5bdb] text-sm font-medium font-arimo hover:underline flex items-center gap-1 transition"
                 >
                     Explore Documentation
                     <span className="text-xs">→</span>
-                </a>
+                </motion.a>
 
                 {/* Progress stepper */}
                 {/* <div className="mt-10 flex items-center justify-center gap-0 w-full max-w-sm">
@@ -132,7 +167,7 @@ export default function CTA() {
                 {/* <p className="mt-8 text-gray-500 text-sm font-arimo">
                     Start shipping production-grade endpoints today.
                 </p> */}
-            </div>
+            </motion.div>
         </section>
     );
 }

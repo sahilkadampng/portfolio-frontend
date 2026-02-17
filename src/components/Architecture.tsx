@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 export default function Architecture() {
     const stats = [
         { value: '100%', label: 'Schema Validation' },
@@ -48,7 +50,13 @@ export default function Architecture() {
         <section className="py-20 sm:py-28 px-4 sm:px-6 bg-[#f4f6fb] -mt-36">
             <div className="max-w-6xl mx-auto text-center">
                 {/* Top badge row */}
-                <div className="flex items-center justify-center gap-3 mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="flex items-center justify-center gap-3 mb-8"
+                >
                     <span className="font-mono sm:text-[10px] tracking-[0.2em] text-gray-500 uppercase">
                         Architecture :: Core
                     </span>
@@ -56,24 +64,42 @@ export default function Architecture() {
                     <span className="font-mono text-[10px] sm:text-[13px] tracking-wider text-gray-400">
                         System Guarantees
                     </span>
-                </div>
+                </motion.div>
 
                 {/* Heading */}
-                <h2 className="text-2xl sm:text-3xl md:text-6xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.1 }}
+                    className="text-2xl sm:text-3xl md:text-6xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                >
                     Technical
                     <br />
                     <span className="text-blue-600 italic">Skills</span>
-                </h2>
+                </motion.h2>
 
                 {/* Description */}
-                <p className="mt-6 text-gray-500 text-base sm:text-md max-w-2xl mx-auto">
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mt-6 text-gray-500 text-base sm:text-md max-w-2xl mx-auto"
+                >
                     Outcomes compound because the architecture is stable. Buildr provides a single layer that
                     validates inputs, protects logic, and governs execution across every API you ship.
-                </p>
+                </motion.p>
                 <hr className="mt-9 text-gray-300" />
 
                 {/* Stats row */}
-                <div className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
+                >
                     {stats.map((stat) => (
                         <div key={stat.label} className="px-6 sm:px-10 py-2 text-center">
                             <p className="text-xl sm:text-1xl font-bold text-gray-900">{stat.value}</p>
@@ -82,14 +108,18 @@ export default function Architecture() {
                             </p>
                         </div>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Layer cards */}
                 <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    {layers.map((layer) => (
-                        <div
+                    {layers.map((layer, idx) => (
+                        <motion.div
                             key={layer.title}
-                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-65 transition-shadow"
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-65 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                         >
                             <div>
                                 {/* Top row */}
@@ -119,7 +149,7 @@ export default function Architecture() {
                             <span className="mt-5 inline-block self-start px-3 py-1 border border-gray-200 rounded-md font-mono text-[10px] tracking-wider text-gray-500 uppercase">
                                 {layer.badge}
                             </span>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 

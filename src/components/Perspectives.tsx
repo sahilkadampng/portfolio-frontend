@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 export default function Perspectives() {
     return (
         <section className="py-20 sm:py-28 px-4 sm:px-6 bg-[#f4f6fb] -mt-22">
@@ -8,8 +10,15 @@ export default function Perspectives() {
                         { num: '01', title: 'Structured Ingest', desc: 'Seamless, organized, and ready to scale.' },
                         { num: '02', title: 'Protected Core', desc: 'Logic stays server-side' },
                         { num: '03', title: 'Architectures', desc: 'Endpoints scale instantly' },
-                    ].map((item) => (
-                        <div key={item.num} className="flex items-start gap-3 px-4 sm:px-8 py-2">
+                    ].map((item, i) => (
+                        <motion.div
+                            key={item.num}
+                            initial={{ opacity: 0, y: 25 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                            className="flex items-start gap-3 px-4 sm:px-8 py-2"
+                        >
                             <span className="flex items-center justify-center w-7 h-7 border border-gray-300 rounded-md font-mono text-[10px] text-gray-400 shrink-0">
                                 {item.num}
                             </span>
@@ -19,17 +28,29 @@ export default function Perspectives() {
                                 </h4>
                                 <p className="text-gray-500 text-sm mt-0.5">{item.desc}</p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
                 {/* Section subtitle */}
-                <p className="mt-16 sm:mt-20 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-500 uppercase">
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="mt-16 sm:mt-20 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-500 uppercase"
+                >
                     Two perspectives: backend config vs. the consumer's experience.
-                </p>
+                </motion.p>
 
                 {/* Two-panel split */}
-                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 border border-gray-200 rounded-xl overflow-hidden bg-white">
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.15 }}
+                    className="mt-10 grid grid-cols-1 md:grid-cols-2 border border-gray-200 rounded-xl overflow-hidden bg-white"
+                >
                     {/* Developer View */}
                     <div className="p-6 sm:p-10 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
                         <div>
@@ -164,7 +185,7 @@ export default function Perspectives() {
                             </p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Bottom tagline */}
                 <p className="mt-16 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase">

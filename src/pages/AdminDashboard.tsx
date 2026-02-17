@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { API_URL } from '../config/api';
@@ -26,6 +26,9 @@ interface VisitorEntry {
     os: string;
     page: string;
     referrer: string;
+    country: string;
+    city: string;
+    region: string;
     createdAt: string;
 }
 
@@ -68,6 +71,8 @@ export default function AdminDashboard() {
     const [visitorSearch, setVisitorSearch] = useState('');
     const [visitorPage, setVisitorPage] = useState(1);
     const [visitorTotalPages, setVisitorTotalPages] = useState(1);
+    const [visitorMenuOpen, setVisitorMenuOpen] = useState<string | null>(null);
+    const visitorMenuRef = useRef<HTMLDivElement>(null);
 
     // --- Blocked state ---
     const [blocked, setBlocked] = useState<BlockedEntry[]>([]);
@@ -138,6 +143,49 @@ export default function AdminDashboard() {
     useEffect(() => { if (activeTab === 'emails') fetchEmails(); }, [activeTab, fetchEmails]);
     useEffect(() => { if (activeTab === 'visitors') fetchVisitors(); }, [activeTab, fetchVisitors]);
     useEffect(() => { if (activeTab === 'blocked') fetchBlocked(); }, [activeTab, fetchBlocked]);
+
+    // Close visitor three-dot menu on outside click
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (visitorMenuRef.current && !visitorMenuRef.current.contains(e.target as Node)) {
+                setVisitorMenuOpen(null);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    // Visitor actions
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text);
+        setVisitorMenuOpen(null);
+    };
+
+    const blockVisitorIP = async (ip: string) => {
+        if (!confirm(`Block IP ${ip}?`)) return;
+        try {
+            await fetch(`${API_URL}/visitors/block-ip`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+                body: JSON.stringify({ ip, reason: 'Manually blocked from admin panel' }),
+            });
+            fetchVisitors();
+            fetchBlocked();
+        } catch (err) { console.error('Block IP error:', err); }
+        setVisitorMenuOpen(null);
+    };
+
+    const deleteVisitor = async (id: string) => {
+        if (!confirm('Delete this visitor record?')) return;
+        try {
+            await fetch(`${API_URL}/visitors/${id}`, {
+                method: 'DELETE',
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            fetchVisitors();
+        } catch (err) { console.error('Delete visitor error:', err); }
+        setVisitorMenuOpen(null);
+    };
 
     // Actions
     const updateEmailStatus = async (id: string, status: string) => {
@@ -337,13 +385,15 @@ export default function AdminDashboard() {
 
                         {/* Table */}
                         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-                            <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-3 bg-[#f4f6fb] border-b border-gray-200">
+                            <div className="hidden sm:grid grid-cols-14 gap-4 px-6 py-3 bg-[#f4f6fb] border-b border-gray-200">
                                 <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">IP Address</div>
+                                <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">Location</div>
                                 <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">Device</div>
                                 <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">Browser</div>
-                                <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">OS</div>
+                                <div className="col-span-1 font-mono text-[10px] tracking-wider text-gray-400 uppercase">OS</div>
                                 <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">Page</div>
                                 <div className="col-span-2 font-mono text-[10px] tracking-wider text-gray-400 uppercase">Date</div>
+                                <div className="col-span-1 font-mono text-[10px] tracking-wider text-gray-400 uppercase text-right">Actions</div>
                             </div>
                             {visitorLoading && (
                                 <div className="px-6 py-12 text-center">
@@ -355,9 +405,14 @@ export default function AdminDashboard() {
                                 <div className="px-6 py-12 text-center"><p className="font-mono text-sm text-gray-400">No visitors recorded yet.</p></div>
                             )}
                             {!visitorLoading && visitors.map((v) => (
-                                <div key={v._id} className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 border-b border-gray-100 hover:bg-gray-50/50 transition items-center">
+                                <div key={v._id} className="grid grid-cols-1 sm:grid-cols-14 gap-2 sm:gap-4 px-6 py-4 border-b border-gray-100 hover:bg-gray-50/50 transition items-center">
                                     <div className="sm:col-span-2">
                                         <span className="font-mono text-xs text-gray-800">{v.ip}</span>
+                                    </div>
+                                    <div className="sm:col-span-2">
+                                        <span className="font-mono text-[10px] tracking-wider text-gray-600">
+                                            {v.city && v.city !== 'Unknown' ? `${v.city}, ` : ''}{v.country || 'Unknown'}
+                                        </span>
                                     </div>
                                     <div className="sm:col-span-2">
                                         <span className="font-mono text-[10px] tracking-wider text-gray-500 uppercase">{v.device}</span>
@@ -365,7 +420,7 @@ export default function AdminDashboard() {
                                     <div className="sm:col-span-2">
                                         <span className="font-mono text-[10px] tracking-wider text-gray-500 uppercase">{v.browser}</span>
                                     </div>
-                                    <div className="sm:col-span-2">
+                                    <div className="sm:col-span-1">
                                         <span className="font-mono text-[10px] tracking-wider text-gray-500 uppercase">{v.os}</span>
                                     </div>
                                     <div className="sm:col-span-2">
@@ -373,6 +428,62 @@ export default function AdminDashboard() {
                                     </div>
                                     <div className="sm:col-span-2">
                                         <span className="font-mono text-[10px] tracking-wider text-gray-400">{formatDate(v.createdAt)}</span>
+                                    </div>
+                                    <div className="sm:col-span-1 text-right relative">
+                                        <button
+                                            onClick={() => setVisitorMenuOpen(visitorMenuOpen === v._id ? null : v._id)}
+                                            className="p-1.5 rounded-lg hover:bg-gray-100 transition cursor-pointer"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                                <circle cx="10" cy="4" r="1.5" />
+                                                <circle cx="10" cy="10" r="1.5" />
+                                                <circle cx="10" cy="16" r="1.5" />
+                                            </svg>
+                                        </button>
+                                        {visitorMenuOpen === v._id && (
+                                            <div ref={visitorMenuRef} className="absolute right-0 top-8 z-50 w-48 bg-white border border-gray-200 rounded-xl shadow-lg py-1 animate-in fade-in">
+                                                <button
+                                                    onClick={() => copyToClipboard(v.ip)}
+                                                    className="w-full text-left px-4 py-2.5 text-xs font-mono text-gray-700 hover:bg-gray-50 transition flex items-center gap-2 cursor-pointer"
+                                                >
+                                                    <span className="text-gray-400"></span> Copy IP Address
+                                                </button>
+                                                <button
+                                                    onClick={() => copyToClipboard(`${v.device} | ${v.browser} | ${v.os}`)}
+                                                    className="w-full text-left px-4 py-2.5 text-xs font-mono text-gray-700 hover:bg-gray-50 transition flex items-center gap-2 cursor-pointer"
+                                                >
+                                                    <span className="text-gray-400"></span> Copy Device Info
+                                                </button>
+                                                <button
+                                                    onClick={() => copyToClipboard(`${v.city}, ${v.region}, ${v.country}`)}
+                                                    className="w-full text-left px-4 py-2.5 text-xs font-mono text-gray-700 hover:bg-gray-50 transition flex items-center gap-2 cursor-pointer"
+                                                >
+                                                    <span className="text-gray-400"></span> Copy Location
+                                                </button>
+                                                <div className="h-px bg-gray-100 my-1" />
+                                                <button
+                                                    onClick={() => {
+                                                        setVisitorSearch(v.ip);
+                                                        setVisitorMenuOpen(null);
+                                                    }}
+                                                    className="w-full text-left px-4 py-2.5 text-xs font-mono text-gray-700 hover:bg-gray-50 transition flex items-center gap-2 cursor-pointer"
+                                                >
+                                                    <span className="text-gray-400"></span> Filter by this IP
+                                                </button>
+                                                <button
+                                                    onClick={() => blockVisitorIP(v.ip)}
+                                                    className="w-full text-left px-4 py-2.5 text-xs font-mono text-red-600 hover:bg-red-50 transition flex items-center gap-2 cursor-pointer"
+                                                >
+                                                    <span className="text-red-400"></span> Block IP
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteVisitor(v._id)}
+                                                    className="w-full text-left px-4 py-2.5 text-xs font-mono text-red-600 hover:bg-red-50 transition flex items-center gap-2 cursor-pointer"
+                                                >
+                                                    <span className="text-red-400"></span> Delete Record
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             ))}

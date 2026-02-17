@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 export default function Skills() {
     const categories = [
         {
@@ -55,7 +57,13 @@ export default function Skills() {
         <section className="py-20 sm:py-28 px-4 sm:px-6 bg-[#f4f6fb] -mt-38">
             <div className="max-w-6xl mx-auto text-center">
                 {/* Top badge */}
-                <div className="flex items-center justify-center gap-3 mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="flex items-center justify-center gap-3 mb-8"
+                >
                     <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-500 uppercase">
                         Stack :: Overview
                     </span>
@@ -63,23 +71,41 @@ export default function Skills() {
                     <span className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400">
                         Technical Proficiency
                     </span>
-                </div>
+                </motion.div>
 
                 {/* Heading */}
-                <h2 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.1 }}
+                    className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                >
                     Technical Skills.
                     <br />
                     <span className="text-blue-600 italic">Battle Tested.</span>
-                </h2>
+                </motion.h2>
 
                 {/* Description */}
-                <p className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto"
+                >
                     Every tool in the stack is chosen for production reliability. From database design to
                     deployment pipelines — built to scale, secured by default.
-                </p>
+                </motion.p>
 
                 {/* Stats row */}
-                <div className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
+                >
                     {[
                         { value: '5', label: 'Technologies' },
                         { value: 'Backend', label: 'Coverage' },
@@ -92,14 +118,18 @@ export default function Skills() {
                             </p>
                         </div>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Skill category cards */}
                 <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {categories.map((cat, idx) => (
-                        <div
+                        <motion.div
                             key={cat.title}
-                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-75 hover:shadow-md transition-shadow"
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-75 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                         >
                             {/* Header */}
                             <div>
@@ -135,7 +165,7 @@ export default function Skills() {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 

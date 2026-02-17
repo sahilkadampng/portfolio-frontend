@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const image = '/download.png'
 
 export default function Hero() {
     const [activeTab, setActiveTab] = useState<'input' | 'output'>('input')
+    const heroRef = useRef(null)
+    const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+    const heroY = useTransform(scrollYProgress, [0, 1], [0, 180])
+    const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.93])
+
     return (
-        <section className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#f4f6fb] px-4 sm:px-6">
+        <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#f4f6fb] px-4 sm:px-6">
             {/* Image background — behind everything */}
             <img
                 src={image}
@@ -38,57 +45,98 @@ export default function Hero() {
                 </div>
             </div>
 
-            <div className="max-w-5xl mx-auto px-2 sm:px-6 relative z-10 w-full">
+            <motion.div
+                style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
+                className="max-w-5xl mx-auto px-2 sm:px-6 relative z-10 w-full"
+            >
                 {/* Top badge */}
-                <p className="mt-20 text-[10px] tracking-[0.3em] text-gray-500 mb-6 uppercase">
-                    ● API Infrastructure for Modern SaaS ●
-                </p>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="mt-20 text-[10px] tracking-[0.3em] text-gray-500 mb-6 uppercase"
+                >
+                    ● Infrastructure for Modern SaaS ●
+                </motion.p>
 
                 {/* Main heading */}
-                <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-tight text-gray-900 uppercase tracking-tight">
-                    The Infrastructure
+                <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-tight text-gray-900 tracking-tight"
+                >
+                    THE INFRASTRUCTURE
                     <br />
-                    <span className="text-blue-600">For Modern APIs.</span>
-                </h1>
+                    <span className="text-blue-600">FOR MODERN APPs.</span>
+                </motion.h1>
 
                 <div className="mt-6 relative z-10 flex justify-center">
                 </div>
 
 
                 {/* Subtext */}
-                <div className="h-32">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="h-32"
+                >
                     <p className="font-vend text-[19px] text-black max-w-3xl mx-auto bg-white/20 backdrop-blur-3xl">
-                        Design, secure, and deploy scalable API endpoints — without exposing
-                        your core logic.
+                        Design, secure, and deploy scalable SaaS APPs
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Glass card */}
-                <div className="relative max-w-2xl mx-auto p-4 sm:p-8
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="relative max-w-2xl mx-auto p-4 sm:p-8
 backdrop-blur-sm
 border border-white/10
-rounded-sm">
+rounded-sm"
+                >
                     <p className="text-gray-800">
-                        Buildr is the control layer behind modern SaaS platforms. It
-                        validates requests, enforces policies, and governs deployment —
-                        turning fragile endpoints into production-grade infrastructure.
+                        RAW design and engineer the control layer behind seamless digital experiences, ensuring every project is robust, scalable, and polished.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8"
+                >
                     <button className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-lg cursor-pointer">
                         Request Access
                     </button>
                     <button className="px-8 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 hover:bg-gray-100 transition cursor-pointer">
                         View Documentation
                     </button>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             {/* Terminal preview box */}
-            <div className="relative z-10 w-full max-w-4xl mx-auto mt-10 sm:mt-16 px-2 sm:px-6">
-                <div className="bg-white border border-gray-200 rounded-md overflow-hidden">
+            <motion.div
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="relative z-10 w-full max-w-3xl mx-auto mt-10 sm:mt-16 px-2 sm:px-6"
+            >
+                <div className="relative bg-white border border-gray-200 rounded-md overflow-hidden">
+                    {/* Background grid */}
+                    <div
+                        className="absolute inset-0 opacity-[0.03] pointer-events-none mt-21.5"
+                        style={{
+                            backgroundImage:
+                                'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+                            backgroundSize: '25px 25px',
+                            backgroundRepeat: 'repeat',
+                        }}
+                    />
+
                     {/* Top bar */}
                     <div className="px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
                         <div className="flex items-center gap-3">
@@ -102,32 +150,45 @@ rounded-sm">
                                 DEVELOPER_PROFILE::/api/V1
                             </span>
                         </div>
-                        <div className="flex gap-2 w-full sm:w-auto">
+                        <div className="flex gap-2 w-full sm:w-auto justify-center sm:justify-end">
                             <button
                                 onClick={() => setActiveTab('input')}
-                                className={`px-4 py-1.5 text-sm font-medium border border-gray-300 rounded-md transition cursor-pointer ${activeTab === 'input' ? 'bg-gray-900 text-white border-gray-900' : 'hover:bg-gray-50'}`}
+                                className={`px-4 py-1.5 text-sm font-medium border border-gray-300 rounded-md transition cursor-pointer ${activeTab === 'input' ? 'bg-gray-900 text-white border-gray-900' : 'hover:bg-gray-50'
+                                    }`}
                             >
                                 REQUEST
                             </button>
                             <button
                                 onClick={() => setActiveTab('output')}
-                                className={`px-4 py-1.5 text-sm font-medium border border-gray-300 rounded-md transition cursor-pointer ${activeTab === 'output' ? 'bg-gray-900 text-white border-gray-900' : 'hover:bg-gray-50'}`}
+                                className={`px-4 py-1.5 text-sm font-medium border border-gray-300 rounded-md transition cursor-pointer ${activeTab === 'output' ? 'bg-gray-900 text-white border-gray-900' : 'hover:bg-gray-50'
+                                    }`}
                             >
                                 RESPONSE
                             </button>
                         </div>
                     </div>
 
-                    {/* Code content */}
-                    <div className="px-4 sm:px-8 py-6 sm:py-8 text-left font-mono text-xs sm:text-sm leading-relaxed text-gray-800 mb-10 sm:mb-20 overflow-x-auto">
+                    {/* Code content (fixed height & scrollable) */}
+                    {/* Code content (fixed height & scrollable) */}
+                    <div className="relative px-4 sm:px-8 py-4 sm:py-6 font-mono text-xs sm:text-sm leading-relaxed text-gray-800 w-full h-100 sm:h-112.5 overflow-auto text-left">
                         {activeTab === 'input' ? (
-                            <>
-                                <p><span className="text-purple-500">const</span> developer = {'{'}</p>
+                            <div className="text-left">
+                                <p>
+                                    <span className="text-purple-500">const</span> developer = {'{'}
+                                </p>
                                 <div className="ml-8 mt-2 space-y-1">
-                                    <p>name : <span className="text-green-600">"SAHIL KADAM"</span>,</p>
-                                    <p>age : <span className="text-green-600">19</span>,</p>
-                                    <p>role : <span className="text-green-600">"Backend Developer"</span>,</p>
-                                    <p>location : <span className="text-green-600">"India"</span>,</p>
+                                    <p>
+                                        name : <span className="text-green-600">"SAHIL KADAM"</span>,
+                                    </p>
+                                    <p>
+                                        age : <span className="text-green-600">19</span>,
+                                    </p>
+                                    <p>
+                                        role : <span className="text-green-600">"Backend Developer"</span>,
+                                    </p>
+                                    <p>
+                                        location : <span className="text-green-600">"India"</span>,
+                                    </p>
                                     <p>skills : [</p>
                                     <div className="ml-8 space-y-1">
                                         <p><span className="text-green-600">"React"</span>,</p>
@@ -137,33 +198,49 @@ rounded-sm">
                                         <p><span className="text-green-600">"MongoDB"</span></p>
                                     </div>
                                     <p>] ,</p>
-                                    <p>contact : <span className="text-green-600">"sahilkadam@gmial.com"</span></p>
+                                    <p>
+                                        contact : <span className="text-green-600">"sahilkadam@gmial.com"</span>
+                                    </p>
                                 </div>
                                 <p>{'}'};</p>
-                            </>
+                            </div>
                         ) : (
-                            <>
-                                <p><span className="text-gray-500">// Response<span className="text-green-600"><span className="ml-4 inline-block px-3 py-1 text-gray-600 border border-green-500 bg-green-300 rounded-md text-sm font-medium">200 OK</span>
-                                </span></span></p>
-                                <p className="mt-2">{'{'}</p>
+                            <div className="text-left">
+                                <p>
+                                    <span className="text-gray-500">// Response </span>
+                                    <span className="ml-2 px-2 py-0.5 bg-green-300 rounded text-sm text-green-700">200 OK</span>
+                                </p>
+                                <p>{'{'}</p>
                                 <div className="ml-8 mt-1 space-y-1">
-                                    <p><span className="text-purple-600">"status"</span> : <span className="text-blue-600 font-semibold">200</span>,</p>
-                                    <p><span className="text-purple-600">"message"</span> : <span className="text-green-600">"Developer profile loaded successfully"</span>,</p>
-                                    <p><span className="text-purple-600">"data"</span> : {'{'}</p>
+                                    <p>
+                                        <span className="text-purple-600">"status"</span> :{' '}
+                                        <span className="text-blue-600 font-semibold">200</span>,
+                                    </p>
+                                    <p>
+                                        <span className="text-purple-600">"message"</span> :{' '}
+                                        <span className="text-green-600">"Developer profile loaded successfully"</span>,
+                                    </p>
+                                    <p>
+                                        <span className="text-purple-600">"data"</span> : {'{'}
+                                    </p>
                                     <div className="ml-8 space-y-1">
                                         <p><span className="text-purple-600">"available"</span> : <span className="text-blue-600 font-semibold">true</span>,</p>
                                         <p><span className="text-purple-600">"experience"</span> : <span className="text-green-600">"0 years"</span>,</p>
                                         <p><span className="text-purple-600">"open_to_work"</span> : <span className="text-blue-600 font-semibold">true</span>,</p>
                                         <p><span className="text-purple-600">"projects_completed"</span> : <span className="text-blue-600 font-semibold">15</span>,</p>
-                                        <p><span className="text-purple-600">"github"</span> : <a className="text-green-600" href="https://github.com/sahilkadampng">https://github.com/sahilkadampng</a>,</p>
+                                        <p>
+                                            <span className="text-purple-600">"github"</span> :{' '}
+                                            <a className="text-green-600" href="https://github.com/sahilkadampng">
+                                                https://github.com/sahilkadampng
+                                            </a>,
+                                        </p>
                                     </div>
                                     <p>{'}'}</p>
                                 </div>
                                 <p>{'}'}</p>
-                            </>
+                            </div>
                         )}
                     </div>
-
                     {/* Bottom status */}
                     <div className="px-4 sm:px-6 py-3 flex justify-end">
                         <span className="text-xs tracking-[0.2em] text-gray-500 uppercase flex items-center gap-2">
@@ -172,7 +249,7 @@ rounded-sm">
                         </span>
                     </div>
                 </div>
-            </div>
+            </motion.div>
             <div className="mt-12 my-12 h-px w-full bg-linear-to-r from-transparent via-gray-400 to-transparent" />
         </section>
     );
