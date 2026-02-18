@@ -35,6 +35,11 @@ export default function Navbar() {
                             Infrastructure
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/Donate" className="text-black hover:text-gray-500 transition-colors">
+                            Support
+                        </Link>
+                    </li>
                 </ul>
 
                 {/* RIGHT → LOGIN (desktop) */}
@@ -78,6 +83,11 @@ export default function Navbar() {
                         <li>
                             <Link to="/infrastructure" className="text-black hover:text-gray-600 transition-colors" onClick={() => setMenuOpen(false)}>
                                 Infrastructure
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/Donate" className="text-black hover:text-gray-600 transition-colors" onClick={() => setMenuOpen(false)}>
+                                Support
                             </Link>
                         </li>
                         <li>

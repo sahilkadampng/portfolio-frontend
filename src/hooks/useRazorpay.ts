@@ -119,7 +119,7 @@ export function useRazorpay(): UseRazorpayReturn {
                     amount: order.amount,
                     currency: order.currency,
                     name: 'RAW',
-                    description: 'Support My Work ☕',
+                    description: 'Support Me ☕',
                     image: '/download.png',
                     order_id: order.order_id,
                     handler: async (response: RazorpayResponse) => {

@@ -185,11 +185,11 @@ export default function Hero() {
                                     </p>
                                     <p>skills : [</p>
                                     <div className="ml-8 space-y-1">
-                                        <p><span className="text-green-600">"React"</span>,</p>
-                                        <p><span className="text-green-600">"TypeScript"</span>,</p>
+                                        {/* <p><span className="text-green-600">"python"</span>,</p> */}
+                                        <p><span className="text-green-600">"Mongoose"</span>,</p>
                                         <p><span className="text-green-600">"Node.js"</span>,</p>
                                         <p><span className="text-green-600">"Express"</span>,</p>
-                                        <p><span className="text-green-600">"MongoDB"</span></p>
+                                        <p><span className="text-green-600">"MongoDB"</span>,</p>
                                     </div>
                                     <p>] ,</p>
                                     <p>
@@ -218,14 +218,14 @@ export default function Hero() {
                                         <span className="text-purple-600">"data"</span> : {'{'}
                                     </p>
                                     <div className="ml-8 space-y-1">
-                                        <p><span className="text-purple-600">"available"</span> : <span className="text-blue-600 font-semibold">true</span>,</p>
+                                        <p><span className="text-purple-600">"available"</span> : <span className="text-blue-600 font-semibold">false</span>,</p>
                                         <p><span className="text-purple-600">"experience"</span> : <span className="text-green-600">"0 years"</span>,</p>
-                                        <p><span className="text-purple-600">"open_to_work"</span> : <span className="text-blue-600 font-semibold">true</span>,</p>
-                                        <p><span className="text-purple-600">"projects_completed"</span> : <span className="text-blue-600 font-semibold">15</span>,</p>
+                                        <p><span className="text-purple-600">"open_to_work"</span> : <span className="text-blue-600 font-semibold">false</span>,</p>
+                                        <p><span className="text-purple-600">"projects_completed"</span> : <span className="text-blue-600 font-semibold">2</span>,</p>
                                         <p>
                                             <span className="text-purple-600">"github"</span> :{' '}
                                             <a className="text-green-600" href="https://github.com/sahilkadampng">
-                                                https://github.com/sahilkadampng
+                                                github.com/sahilkadampng
                                             </a>,
                                         </p>
                                     </div>

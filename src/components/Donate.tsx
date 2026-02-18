@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Navbar from '../components/Navbar';
 import { useRazorpay } from '../hooks/useRazorpay';
 import { getDonationTotal, getRecentSupporters, type Supporter, type DonationStats } from '../services/donationService';
 
@@ -313,291 +314,298 @@ export default function Donate() {
     };
 
     return (
-        <section id="donate" className="w-full bg-[#f4f6fb] py-20 md:py-28 px-4 flex flex-col items-center scroll-mt-32 relative overflow-hidden">
-            {/* Background glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full bg-blue-600/5 blur-3xl pointer-events-none" />
+        <>
+            <Navbar />
+            <section id="donate" className="w-full bg-[#f4f6fb] py-20 md:py-28 px-4 flex flex-col items-center scroll-mt-32 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.05]" style={{
+                    backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+                    backgroundSize: '60px 60px'
+                }} />
+                {/* Background glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full bg-blue-600/5 blur-3xl pointer-events-none" />
 
-            {/* Heading */}
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="text-center mb-12 relative z-10"
-            >
-                <h2 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-gray-900 uppercase tracking-tight">
-                    Support My <span className="text-blue-600">Work</span>
-                </h2>
-                <p className="mt-4 text-gray-400 text-base sm:text-lg font-arimo max-w-lg mx-auto">
-                    If my work has helped you, consider buying me a coffee. Every contribution fuels the next build.
-                </p>
+                {/* Heading */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7 }}
+                    className="text-center mb-12 relative z-10"
+                >
+                    <h2 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-gray-900 uppercase tracking-tight">
+                        Support <span className="text-blue-600">Me</span>
+                    </h2>
+                    <p className="mt-4 text-gray-400 text-base sm:text-lg font-arimo max-w-lg mx-auto">
+                        If my work has helped you, consider buying me a coffee. Every contribution fuels the next build.
+                    </p>
 
-                {/* Total raised */}
-                {stats.count > 0 && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10"
-                    >
-                        <span className="text-xs text-gray-400 uppercase tracking-widest">Raised</span>
-                        <span className="text-xl font-bold text-emerald-400">₹{animatedTotal.toLocaleString('en-IN')}</span>
-                        <span className="text-xs text-gray-500">from {stats.count} supporters</span>
-                    </motion.div>
-                )}
-            </motion.div>
+                    {/* Total raised */}
+                    {stats.count > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10"
+                        >
+                            <span className="text-xs text-gray-400 uppercase tracking-widest">Raised</span>
+                            <span className="text-xl font-bold text-emerald-400">₹{animatedTotal.toLocaleString('en-IN')}</span>
+                            <span className="text-xs text-gray-500">from {stats.count} supporters</span>
+                        </motion.div>
+                    )}
+                </motion.div>
 
-            {/* Glass card */}
-            <motion.div
-                initial={{ opacity: 0, y: 50, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="relative w-full max-w-lg z-10"
-            >
-                {/* Gradient border glow */}
-                {/* <div className="absolute -inset-px rounded-3xl bg-linear-to-br from-blue-500/30 via-purple-500/20 to-emerald-500/30 blur-sm -z-10" />
+                {/* Glass card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 50, scale: 0.96 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.1 }}
+                    className="relative w-full max-w-lg z-10"
+                >
+                    {/* Gradient border glow */}
+                    {/* <div className="absolute -inset-px rounded-3xl bg-linear-to-br from-blue-500/30 via-purple-500/20 to-emerald-500/30 blur-sm -z-10" />
                 <div className="absolute -inset-px rounded-3xl bg-linear-to-br from-blue-500/40 via-purple-500/30 to-emerald-500/40 -z-10" /> */}
 
-                {/* Terminal window */}
-                <div className="rounded-2xl overflow-hidden border border-gray-700/60 ">
-                    {/* Title bar */}
-                    <div className="flex items-center gap-2 bg-[#202020] px-4 py-3 border-b border-gray-700/50">
-                        <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                        <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                        <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-                        <span className="ml-3 text-xs text-gray-500 font-mono tracking-wide select-none">~/support — donate.sh</span>
-                    </div>
+                    {/* Terminal window */}
+                    <div className="rounded-2xl overflow-hidden border border-gray-700/60 ">
+                        {/* Title bar */}
+                        <div className="flex items-center gap-2 bg-[#202020] px-4 py-3 border-b border-gray-700/50">
+                            <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                            <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                            <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+                            <span className="ml-3 text-xs text-gray-500 font-mono tracking-wide select-none">~/support — donate.sh</span>
+                        </div>
 
-                    {/* Editor body */}
-                    <div className="bg-[#ffffff] px-6 sm:px-8 py-7 font-mono text-[13px] leading-relaxed">
-                        {/* Line numbers gutter + code */}
-                        <div className="flex gap-5">
-                            {/* Line numbers */}
-                            <div className="select-none text-gray-300 text-right text-xs leading-relaxed pt-px hidden sm:block">
-                                {Array.from({ length: isCustom ? 17 : 15 }, (_, i) => (
-                                    <div key={i} className="h-6.5 flex items-center justify-end">{i + 1}</div>
-                                ))}
-                            </div>
+                        {/* Editor body */}
+                        <div className="bg-[#ffffff] px-6 sm:px-8 py-7 font-mono text-[13px] leading-relaxed">
+                            {/* Line numbers gutter + code */}
+                            <div className="flex gap-5">
+                                {/* Line numbers */}
+                                <div className="select-none text-gray-300 text-right text-xs leading-relaxed pt-px hidden sm:block">
+                                    {Array.from({ length: isCustom ? 17 : 15 }, (_, i) => (
+                                        <div key={i} className="h-6.5 flex items-center justify-end">{i + 1}</div>
+                                    ))}
+                                </div>
 
-                            {/* Code content */}
-                            <div className="flex-1 min-w-0">
-                                {/* Line 1: comment */}
-                                <p className="text-gray-400 italic h-6.5 flex items-center">
-                                    <span className="text-gray-400">{'//'}</span> support configuration
-                                </p>
+                                {/* Code content */}
+                                <div className="flex-1 min-w-0">
+                                    {/* Line 1: comment */}
+                                    <p className="text-gray-400 italic h-6.5 flex items-center">
+                                        <span className="text-gray-400">{'//'}</span> support configuration
+                                    </p>
 
-                                {/* Line 2: import */}
-                                <p className="h-6.5 flex items-center">
-                                    <span className="text-purple-500">import</span>
-                                    <span className="text-gray-800 ml-1"> {' { '}</span>
-                                    <span className="text-blue-600 ml-1">razorpay</span>
-                                    <span className="text-gray-800 ml-1">{' }'} </span>
-                                    <span className="text-purple-500 ml-1"> from </span>
-                                    <span className="text-green-600 ml-1">  &apos;@payments&apos; </span>
-                                    <span className="text-gray-400">;</span>
-                                </p>
+                                    {/* Line 2: import */}
+                                    <p className="h-6.5 flex items-center">
+                                        <span className="text-purple-500">import</span>
+                                        <span className="text-gray-800 ml-1"> {' { '}</span>
+                                        <span className="text-blue-600 ml-1">razorpay</span>
+                                        <span className="text-gray-800 ml-1">{' }'} </span>
+                                        <span className="text-purple-500 ml-1"> from </span>
+                                        <span className="text-green-600 ml-1">  &apos;@payments&apos; </span>
+                                        <span className="text-gray-400">;</span>
+                                    </p>
 
-                                {/* Line 3: blank */}
-                                <div className="h-6.5" />
+                                    {/* Line 3: blank */}
+                                    <div className="h-6.5" />
 
-                                {/* Line 4: const amount label */}
-                                <p className="h-6.5 flex items-center">
-                                    <span className="text-purple-500"> const </span>
-                                    <span className="text-blue-600 ml-1"> amount </span>
-                                    <span className="text-gray-400 ml-1"> = </span>
-                                    <span className="text-amber-600 ml-1">{finalAmount || '?'}</span>
-                                    <span className="text-gray-400">;</span>
-                                    <span className="text-gray-400 ml-3 text-xs italic">{'// ₹ INR'}</span>
-                                </p>
+                                    {/* Line 4: const amount label */}
+                                    <p className="h-6.5 flex items-center">
+                                        <span className="text-purple-500"> const </span>
+                                        <span className="text-blue-600 ml-1"> amount </span>
+                                        <span className="text-gray-400 ml-1"> = </span>
+                                        <span className="text-amber-600 ml-1">{finalAmount || '?'}</span>
+                                        <span className="text-gray-400">;</span>
+                                        <span className="text-gray-400 ml-3 text-xs italic">{'// ₹ INR'}</span>
+                                    </p>
 
-                                {/* Amount buttons */}
-                                <div className="grid grid-cols-5 gap-2 my-3">
-                                    {PRESET_AMOUNTS.map((amt) => (
+                                    {/* Amount buttons */}
+                                    <div className="grid grid-cols-5 gap-2 my-3">
+                                        {PRESET_AMOUNTS.map((amt) => (
+                                            <motion.button
+                                                key={amt}
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                onClick={() => handleSelectPreset(amt)}
+                                                className={`py-2.5 rounded-sm text-sm font-extrabold transition-all cursor-pointer ${!isCustom && selectedAmount === amt
+                                                    ? 'bg-emerald-500/15 text-gray-600 border border-green-500'
+                                                    : 'bg-gray-50 text-gray-400 hover:bg-gray-100 border border-gray-200 hover:text-gray-600'
+                                                    }`}
+                                            >
+                                                ₹{amt}
+                                            </motion.button>
+                                        ))}
                                         <motion.button
-                                            key={amt}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            onClick={() => handleSelectPreset(amt)}
-                                            className={`py-2.5 rounded-sm text-sm font-extrabold transition-all cursor-pointer ${!isCustom && selectedAmount === amt
+                                            onClick={handleCustom}
+                                            className={`py-2.5 rounded-sm text-sm font-extrabold transition-all cursor-pointer ${isCustom
                                                 ? 'bg-emerald-500/15 text-gray-600 border border-green-500'
                                                 : 'bg-gray-50 text-gray-400 hover:bg-gray-100 border border-gray-200 hover:text-gray-600'
                                                 }`}
                                         >
-                                            ₹{amt}
+                                            Custom
                                         </motion.button>
-                                    ))}
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        onClick={handleCustom}
-                                        className={`py-2.5 rounded-sm text-sm font-extrabold transition-all cursor-pointer ${isCustom
-                                            ? 'bg-emerald-500/15 text-gray-600 border border-green-500'
-                                            : 'bg-gray-50 text-gray-400 hover:bg-gray-100 border border-gray-200 hover:text-gray-600'
-                                            }`}
-                                    >
-                                        Custom
-                                    </motion.button>
-                                </div>
-
-                                {/* Custom amount input */}
-                                <AnimatePresence>
-                                    {isCustom && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: 'auto', opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                            className="overflow-hidden mb-2"
-                                        >
-                                            <p className="h-6.5 flex items-center mb-1">
-                                                <span className="text-purple-500">let</span>
-                                                <span className="text-blue-600"> customAmount</span>
-                                                <span className="text-gray-400"> = </span>
-                                            </p>
-                                            <input
-                                                type="number"
-                                                min={10}
-                                                max={500000}
-                                                value={customAmount}
-                                                onChange={(e) => setCustomAmount(e.target.value)}
-                                                placeholder="10"
-                                                className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-amber-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all"
-                                            />
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-
-                                {/* Line 5: blank */}
-                                <div className="h-6.5" />
-
-                                {/* Line 6: donor object comment */}
-                                <p className="text-gray-400 italic h-6.5 flex items-center">
-                                    <span className="text-gray-400">{'//'}</span> donor details
-                                </p>
-
-                                {/* Line 7: const donor = { */}
-                                <p className="h-6.5 flex items-center">
-                                    <span className="text-purple-500">const</span>
-                                    <span className="text-blue-600 ml-1"> donor</span>
-                                    <span className="text-gray-400 ml-1"> = </span>
-                                    <span className="text-gray-800 ml-1">{'{'}</span>
-                                </p>
-
-                                {/* Line 8: name field */}
-                                <div className="pl-5 mb-1">
-                                    <p className="h-6.5 flex items-center">
-                                        <span className="text-blue-600">name</span>
-                                        <span className="text-gray-400">: </span>
-                                    </p>
-                                    <input
-                                        type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        placeholder='"Anonymous"'
-                                        maxLength={100}
-                                        className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-green-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all"
-                                    />
-                                </div>
-
-                                {/* Line 9: message field */}
-                                <div className="pl-5 mt-2 mb-1">
-                                    <p className="h-6.5 flex items-center">
-                                        <span className="text-blue-600">message</span>
-                                        <span className="text-gray-400">: </span>
-                                    </p>
-                                    <textarea
-                                        value={message}
-                                        onChange={(e) => setMessage(e.target.value)}
-                                        placeholder='"your message here..."'
-                                        maxLength={500}
-                                        rows={2}
-                                        className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-green-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all resize-none"
-                                    />
-                                </div>
-
-                                {/* Line 10: closing brace */}
-                                <p className="h-6.5 flex items-center">
-                                    <span className="text-gray-800">{'}'}</span>
-                                    <span className="text-gray-400">;</span>
-                                </p>
-
-                                {/* Line 11: blank */}
-                                <div className="h-6.5" />
-
-                                {/* Error */}
-                                <AnimatePresence>
-                                    {error && (
-                                        <motion.p
-                                            initial={{ opacity: 0, y: -8 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0 }}
-                                            className="text-red-500 text-xs mb-3 font-mono flex items-center gap-2"
-                                        >
-                                            <span className="text-red-400">{'// ⚠'}</span> {error}
-                                        </motion.p>
-                                    )}
-                                </AnimatePresence>
-
-                                {/* Line 12: function call = pay button */}
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={handlePay}
-                                    disabled={status === 'loading' || (isCustom && (!customAmount || Number(customAmount) < 10))}
-                                    className="w-full py-3 rounded border border-green-300 bg-green-50 text-left font-mono text-sm flex items-center justify-center gap-1 transition-all hover:bg-green-100 hover:border-green-400 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                                >
-                                    {status === 'loading' ? (
-                                        <>
-                                            <Spinner />
-                                            <span className="text-gray-400 ml-2">awaiting response...</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="text-purple-500">await</span>
-                                            <span className="text-blue-600 ml-1">razorpay</span>
-                                            <span className="text-gray-800">.</span>
-                                            <span className="text-amber-600">pay</span>
-                                            <span className="text-gray-800">(</span>
-                                            <span className="text-amber-600">{finalAmount || '?'}</span>
-                                            <span className="text-gray-800">)</span>
-                                            <span className="text-gray-400">;</span>
-                                        </>
-                                    )}
-                                </motion.button>
-
-                                {/* Line 13: blank */}
-                                <div className="h-6.5" />
-
-                                {/* Line 14: secured comment */}
-                                <p className="text-gray-400 text-xs italic h-6.5 flex items-center">
-                                    {'// '} secured by razorpay · encrypted
-                                </p>
-
-                                {/* Recent supporters ticker */}
-                                {supporters.length > 0 && (
-                                    <div className="mt-4 pt-4 border-t border-gray-100">
-                                        <p className="text-gray-300 text-xs italic h-6.5 flex items-center mb-1">
-                                            {'// 💛'} recent supporters
-                                        </p>
-                                        <SupporterTicker supporters={supporters} />
                                     </div>
-                                )}
+
+                                    {/* Custom amount input */}
+                                    <AnimatePresence>
+                                        {isCustom && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                className="overflow-hidden mb-2"
+                                            >
+                                                <p className="h-6.5 flex items-center mb-1">
+                                                    <span className="text-purple-500">let</span>
+                                                    <span className="text-blue-600"> customAmount</span>
+                                                    <span className="text-gray-400"> = </span>
+                                                </p>
+                                                <input
+                                                    type="number"
+                                                    min={10}
+                                                    max={500000}
+                                                    value={customAmount}
+                                                    onChange={(e) => setCustomAmount(e.target.value)}
+                                                    placeholder="10"
+                                                    className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-amber-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all"
+                                                />
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
+                                    {/* Line 5: blank */}
+                                    <div className="h-6.5" />
+
+                                    {/* Line 6: donor object comment */}
+                                    <p className="text-gray-400 italic h-6.5 flex items-center">
+                                        <span className="text-gray-400">{'//'}</span> donor details
+                                    </p>
+
+                                    {/* Line 7: const donor = { */}
+                                    <p className="h-6.5 flex items-center">
+                                        <span className="text-purple-500">const</span>
+                                        <span className="text-blue-600 ml-1"> donor</span>
+                                        <span className="text-gray-400 ml-1"> = </span>
+                                        <span className="text-gray-800 ml-1">{'{'}</span>
+                                    </p>
+
+                                    {/* Line 8: name field */}
+                                    <div className="pl-5 mb-1">
+                                        <p className="h-6.5 flex items-center">
+                                            <span className="text-blue-600">name</span>
+                                            <span className="text-gray-400">: </span>
+                                        </p>
+                                        <input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            placeholder='"Anonymous"'
+                                            maxLength={100}
+                                            className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-green-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all"
+                                        />
+                                    </div>
+
+                                    {/* Line 9: message field */}
+                                    <div className="pl-5 mt-2 mb-1">
+                                        <p className="h-6.5 flex items-center">
+                                            <span className="text-blue-600">message</span>
+                                            <span className="text-gray-400">: </span>
+                                        </p>
+                                        <textarea
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                            placeholder='"your message here..."'
+                                            maxLength={500}
+                                            rows={2}
+                                            className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-green-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all resize-none"
+                                        />
+                                    </div>
+
+                                    {/* Line 10: closing brace */}
+                                    <p className="h-6.5 flex items-center">
+                                        <span className="text-gray-800">{'}'}</span>
+                                        <span className="text-gray-400">;</span>
+                                    </p>
+
+                                    {/* Line 11: blank */}
+                                    <div className="h-6.5" />
+
+                                    {/* Error */}
+                                    <AnimatePresence>
+                                        {error && (
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -8 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0 }}
+                                                className="text-red-500 text-xs mb-3 font-mono flex items-center gap-2"
+                                            >
+                                                <span className="text-red-400">{'// ⚠'}</span> {error}
+                                            </motion.p>
+                                        )}
+                                    </AnimatePresence>
+
+                                    {/* Line 12: function call = pay button */}
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={handlePay}
+                                        disabled={status === 'loading' || (isCustom && (!customAmount || Number(customAmount) < 10))}
+                                        className="w-full py-3 rounded border border-green-300 bg-green-50 text-left font-mono text-sm flex items-center justify-center gap-1 transition-all hover:bg-green-100 hover:border-green-400 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                                    >
+                                        {status === 'loading' ? (
+                                            <>
+                                                <Spinner />
+                                                <span className="text-gray-400 ml-2">awaiting response...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="text-purple-500">await</span>
+                                                <span className="text-blue-600 ml-1">razorpay</span>
+                                                <span className="text-gray-800">.</span>
+                                                <span className="text-amber-600">pay</span>
+                                                <span className="text-gray-800">(</span>
+                                                <span className="text-amber-600">{finalAmount || '?'}</span>
+                                                <span className="text-gray-800">)</span>
+                                                <span className="text-gray-400">;</span>
+                                            </>
+                                        )}
+                                    </motion.button>
+
+                                    {/* Line 13: blank */}
+                                    <div className="h-6.5" />
+
+                                    {/* Line 14: secured comment */}
+                                    <p className="text-gray-400 text-xs italic h-6.5 flex items-center">
+                                        {'// '} secured by razorpay · encrypted
+                                    </p>
+
+                                    {/* Recent supporters ticker */}
+                                    {supporters.length > 0 && (
+                                        <div className="mt-4 pt-4 border-t border-gray-100">
+                                            <p className="text-gray-600 text-xs italic h-6.5 flex items-center mb-1">
+                                                {'// '} recent supporters
+                                            </p>
+                                            <SupporterTicker supporters={supporters} />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </motion.div>
+                </motion.div>
 
-            {/* Success Modal */}
-            <AnimatePresence>
-                {status === 'success' && successData && (
-                    <SuccessModal
-                        name={successData.name}
-                        amount={successData.amount}
-                        onClose={reset}
-                    />
-                )}
-            </AnimatePresence>
-        </section>
+                {/* Success Modal */}
+                <AnimatePresence>
+                    {status === 'success' && successData && (
+                        <SuccessModal
+                            name={successData.name}
+                            amount={successData.amount}
+                            onClose={reset}
+                        />
+                    )}
+                </AnimatePresence>
+            </section>
+        </>
     );
 }

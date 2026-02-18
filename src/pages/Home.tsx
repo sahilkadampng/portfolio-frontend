@@ -5,7 +5,7 @@ import Workflow from '../components/Workflow';
 import Platforms from '../components/Platforms';
 import Perspectives from '../components/Perspectives';
 import Skills from '../components/Skills';
-import Donate from '../components/Donate';
+// import Donate from '../components/Donate';
 import CTA from '../components/CTA';
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
                 <Platforms />
                 <Perspectives />
                 <Skills />
-                <Donate />
+                {/* <Donate /> */}
                 <CTA />
             </main>
             <Footer />
