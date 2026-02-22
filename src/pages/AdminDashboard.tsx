@@ -210,7 +210,7 @@ export default function AdminDashboard() {
         fetchBlocked();
     };
 
-    const logout = () => { localStorage.removeItem('raw_token'); navigate('/login'); };
+    const logout = () => { localStorage.removeItem('raw_token'); navigate('/'); };
 
     const statusColor: Record<string, string> = {
         new: 'text-green-600 bg-green-50 border-green-200',

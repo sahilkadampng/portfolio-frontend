@@ -9,34 +9,34 @@ export default function Navbar() {
         <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm bg-white/10 border-b border-gray-300">
             <div className="max-w-7xl mx-auto px-6 py-4 relative flex items-center justify-between">
                 {/* LEFT → LOGO */}
-                <Link to="/" className="font-arimo text-xl font-bold text-black">
+                <Link to="/" className="font-arimo text-xl font-bold text-white">
                     RAW
                 </Link>
 
                 {/* CENTER → MENU (desktop) */}
                 <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 gap-8">
                     <li>
-                        <Link to="/about" className="text-black hover:text-gray-500 transition-colors">
+                        <Link to="/about" className="text-white hover:text-gray-500 transition-colors">
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link to="/solutions" className="text-black hover:text-gray-500 transition-colors">
+                        <Link to="/solutions" className="text-white hover:text-gray-500 transition-colors">
                             Solutions
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs" className="text-black hover:text-gray-500 transition-colors">
+                        <Link to="/docs" className="text-white hover:text-gray-500 transition-colors">
                             Docs
                         </Link>
                     </li>
                     <li>
-                        <Link to="/infrastructure" className="text-black hover:text-gray-500 transition-colors">
+                        <Link to="/infrastructure" className="text-white hover:text-gray-500 transition-colors">
                             Infrastructure
                         </Link>
                     </li>
                     <li>
-                        <Link to="/Donate" className="text-black hover:text-gray-500 transition-colors">
+                        <Link to="/Donate" className="text-white hover:text-gray-500 transition-colors">
                             Support
                         </Link>
                     </li>
@@ -46,7 +46,7 @@ export default function Navbar() {
                 <div className="hidden md:block">
                     <Link
                         to="/login"
-                        className="text-black hover:text-gray-600 transition-colors"
+                        className="text-white hover:text-gray-600 transition-colors"
                     >
                         Login
                     </Link>
@@ -54,7 +54,7 @@ export default function Navbar() {
 
                 {/* MOBILE → HAMBURGER */}
                 <button
-                    className="md:hidden text-black"
+                    className="md:hidden text-white"
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     {menuOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}

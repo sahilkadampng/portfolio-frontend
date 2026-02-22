@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import { useRazorpay } from '../hooks/useRazorpay';
+import supportimage from "../assets/support.png";
 import { getDonationTotal, getRecentSupporters, type Supporter, type DonationStats } from '../services/donationService';
 
 // ──────────────────────────────────────────────
@@ -332,8 +333,8 @@ export default function Donate() {
                     transition={{ duration: 0.7 }}
                     className="text-center mb-12 relative z-10"
                 >
-                    <h2 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-gray-900 uppercase tracking-tight">
-                        Support <span className="text-blue-600">Me</span>
+                    <h2 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-gray-900 uppercase flex gap-6 tracking-tight">
+                        Support <span className="text-blue-600">Me</span><img src={supportimage} height='40px' width='70px'></img>
                     </h2>
                     <p className="mt-4 text-gray-400 text-base sm:text-lg font-arimo max-w-lg mx-auto">
                         If my work has helped you, consider buying me a coffee. Every contribution fuels the next build.
@@ -347,7 +348,7 @@ export default function Donate() {
                             className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10"
                         >
                             <span className="text-xs text-gray-400 uppercase tracking-widest">Raised</span>
-                            <span className="text-xl font-bold text-emerald-400">₹{animatedTotal.toLocaleString('en-IN')}</span>
+                            <span className="text-xl font-bold flex gap-2 text-emerald-400">₹{animatedTotal.toLocaleString('en-IN')}</span>
                             <span className="text-xs text-gray-500">from {stats.count} supporters</span>
                         </motion.div>
                     )}
@@ -565,7 +566,7 @@ export default function Donate() {
                                                 <span className="text-gray-800">.</span>
                                                 <span className="text-amber-600">pay</span>
                                                 <span className="text-gray-800">(</span>
-                                                <span className="text-amber-600">{finalAmount || '?'}</span>
+                                                <span className="text-emerald-400 flex gap-2">₹{finalAmount || '?'}</span>
                                                 <span className="text-gray-800">)</span>
                                                 <span className="text-gray-400">;</span>
                                             </>

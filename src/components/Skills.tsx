@@ -1,57 +1,57 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import clr from "../assets/CLR.jpg";
+import db from "../assets/db.jpg";
+// import support from "../assets/support.jpg";
 
 export default function Skills() {
     const categories = [
         {
-            tag: 'Core: Languages',
-            tagColor: 'text-blue-600',
-            title: 'Languages & Runtime',
+            tag: "Core: Languages",
+            tagColor: "text-blue-600",
+            image: clr,
+            title: "Languages & Runtime",
             skills: [
-                { name: 'JavaScript', level: 'Intermediate' },
-                { name: 'TypeScript', level: 'Basic' },
-                { name: 'Node.js', level: 'Intermediate' },
-                { name: 'Python', level: 'Basic' },
+                { name: "JavaScript", level: "Intermediate" },
+                { name: "TypeScript", level: "Basic" },
+                { name: "Node.js", level: "Intermediate" },
+                { name: "Python", level: "Basic" },
             ],
         },
         {
-            tag: 'Core: Frameworks',
-            tagColor: 'text-blue-600',
-            title: 'Frameworks & Libraries',
+            tag: "Core: Frameworks",
+            tagColor: "text-blue-600",
+            title: "Frameworks & Libraries",
             skills: [
-                { name: 'React', level: 'Basic' },
-                { name: 'Express.js', level: 'Intermediate' },
-                // { name: 'Next.js', level: 'Not started' },
-                { name: 'Tailwind CSS', level: 'Intermediate' },
+                { name: "React", level: "Basic" },
+                { name: "Express.js", level: "Intermediate" },
+                { name: "Tailwind CSS", level: "Intermediate" },
             ],
         },
         {
-            tag: 'Core: Database',
-            tagColor: 'text-gray-500',
-            title: 'Database & Storage',
-            skills: [
-                { name: 'MongoDB', level: 'Intermediate' },
-                // { name: 'PostgreSQL', level: 'not started' },
-                // { name: 'Redis', level: 'not started' },
-                // { name: 'Firebase', level: 'not started' },
-            ],
+            tag: "Core: Database",
+            tagColor: "text-gray-500",
+            image: db,
+            title: "Database & Storage",
+            skills: [{ name: "MongoDB", level: "Intermediate" }],
         },
         {
-            tag: 'Core: DevOps',
-            tagColor: 'text-gray-500',
-            title: 'DevOps & Tools',
+            tag: "Core: DevOps",
+            tagColor: "text-gray-500",
+            title: "DevOps & Tools",
             skills: [
-                { name: 'Git & GitHub', level: 'Advanced' },
-                { name: 'Docker', level: 'not started' },
-                { name: 'CI/CD', level: 'not started' },
-                // { name: 'Linux / CLI', level: 'not started' },
+                { name: "Git & GitHub", level: "Advanced" },
+                { name: "Docker", level: "Not started" },
+                { name: "CI/CD", level: "Not started" },
             ],
         },
-    ]
+    ];
 
     const levelColor: Record<string, string> = {
-        Advanced: 'text-green-600 bg-green-50 border-green-200',
-        Intermediate: 'text-blue-600 bg-blue-50 border-blue-200',
-    }
+        Advanced: "text-green-600 bg-green-50 border-green-200",
+        Intermediate: "text-blue-600 bg-blue-50 border-blue-200",
+        Basic: "text-yellow-600 bg-yellow-50 border-yellow-200",
+        "Not started": "text-gray-500 bg-gray-50 border-gray-200",
+    };
 
     return (
         <section className="py-20 sm:py-28 px-4 sm:px-6 bg-[#f4f6fb] -mt-38">
@@ -94,11 +94,12 @@ export default function Skills() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto"
                 >
-                    Every tool in the stack is chosen for production reliability. From database design to
-                    deployment pipelines — built to scale, secured by default.
+                    Every tool in the stack is chosen for production reliability. From
+                    database design to deployment pipelines — built to scale, secured by
+                    default.
                 </motion.p>
 
-                {/* Stats row */}
+                {/* Stats */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -107,12 +108,14 @@ export default function Skills() {
                     className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
                 >
                     {[
-                        { value: '5', label: 'Technologies' },
-                        { value: 'Backend', label: 'Coverage' },
-                        { value: 'Production', label: 'Grade' },
+                        { value: "5", label: "Technologies" },
+                        { value: "Backend", label: "Coverage" },
+                        { value: "Production", label: "Grade" },
                     ].map((stat) => (
                         <div key={stat.label} className="px-6 sm:px-10 py-2 text-center">
-                            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</p>
+                            <p className="text-2xl sm:text-3xl font-bold text-gray-900">
+                                {stat.value}
+                            </p>
                             <p className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400 uppercase mt-1">
                                 {stat.label}
                             </p>
@@ -120,7 +123,7 @@ export default function Skills() {
                     ))}
                 </motion.div>
 
-                {/* Skill category cards */}
+                {/* Cards */}
                 <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {categories.map((cat, idx) => (
                         <motion.div
@@ -129,10 +132,10 @@ export default function Skills() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-75 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-80 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                         >
-                            {/* Header */}
                             <div>
+                                {/* Header */}
                                 <div className="flex items-center justify-between mb-5">
                                     <span
                                         className={`font-mono text-[10px] tracking-wider uppercase ${cat.tagColor}`}
@@ -140,24 +143,41 @@ export default function Skills() {
                                         {cat.tag}
                                     </span>
                                     <span className="font-mono text-xs text-gray-300">
-                                        {String(idx + 1).padStart(2, '0')}
+                                        {String(idx + 1).padStart(2, "0")}
                                     </span>
                                 </div>
 
-                                <h3 className="text-lg font-extrabold text-gray-900 tracking-tight mb-4">
-                                    {cat.title}
-                                </h3>
+                                {/* Image */}
+                                <div className="flex items-center gap-4 mb-4">
+                                    {cat.image && (
+                                        <div className="w-14 h-14 mb-4 rounded-xl bg-gray-50 flex items-center justify-center">
+                                            <img
+                                                src={cat.image}
+                                                alt={cat.title}
+                                                className="w-8 h-8 object-contain"
+                                            />
+                                        </div>
+                                    )}
 
-                                {/* Skill items */}
+                                    <h3 className="text-lg font-extrabold text-gray-900 tracking-tight mb-4">
+                                        {cat.title}
+                                    </h3>
+                                </div>
+
+                                {/* Skills */}
                                 <div className="space-y-2.5">
                                     {cat.skills.map((skill) => (
                                         <div
                                             key={skill.name}
                                             className="flex items-center justify-between px-3 py-2 border border-gray-100 rounded-lg"
                                         >
-                                            <span className="font-mono text-sm text-gray-700">{skill.name}</span>
+                                            <span className="font-mono text-sm text-gray-700">
+                                                {skill.name}
+                                            </span>
                                             <span
-                                                className={`font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 rounded border ${levelColor[skill.level]}`}
+                                                className={`font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 rounded border ${levelColor[skill.level] ||
+                                                    "text-gray-500 bg-gray-50 border-gray-200"
+                                                    }`}
                                             >
                                                 {skill.level}
                                             </span>
@@ -172,11 +192,11 @@ export default function Skills() {
                 {/* Divider */}
                 <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
 
-                {/* Bottom tagline */}
+                {/* Bottom */}
                 <p className="mt-8 font-mono text-[10px] sm:text-xs tracking-[0.2em] text-blue-600 uppercase">
                     Focused on backend systems.
                 </p>
             </div>
         </section>
-    )
+    );
 }

@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Silk from '../components/silkbg'
+import Noise from '../components/noise'
 
 const image = '/download.png'
 
@@ -12,7 +14,10 @@ export default function Hero() {
     const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.93])
 
     return (
-        <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#f4f6fb] px-4 sm:px-6">
+        <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden bg-transparent px-4 sm:px-6">
+            <div className="absolute inset-0 -z-10">
+                <Silk />
+            </div>
             {/* Image background — behind everything */}
             <img
                 src={image}
@@ -32,7 +37,7 @@ export default function Hero() {
                             style={{ top: `${(i + 1) * 11}%` }}
                         />
                     ))}
-                    {/* Vertical curved lines */}
+                    /* Vertical curved lines */
                     {[...Array(6)].map((_, i) => (
                         <div
                             key={`v-${i}`}
@@ -64,16 +69,16 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.2 }}
-                    className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-tight text-gray-900 tracking-tight"
+                    className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-tight text-white tracking-tight"
                 >
                     THE INFRASTRUCTURE
                     <br />
-                    <span className="text-blue-600">FOR MODERN APPs.</span>
+                    <span className="text-gray-500">FOR MODERN APPs.</span>
                 </motion.h1>
 
                 <div className="mt-6 relative z-10 flex justify-center">
                 </div>
-                
+
                 {/* Glass card */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -82,8 +87,8 @@ export default function Hero() {
                     className="
                 relative max-w-2xl mx-auto p-4 sm:p-8
                 rounded-2xl
-                bg-white/90
-                backdrop-blur-2xl
+                bg-white/10
+                backdrop-blur-sm
                 border border-white/10 mt-10
                 ">
                     <p className="text-gray-800">
@@ -119,7 +124,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="relative z-10 w-full max-w-3xl mx-auto mt-10 sm:mt-16 px-2 sm:px-6"
             >
-                <div className="relative bg-white border border-gray-200 rounded-md overflow-hidden">
+                <div className="relative bg-gray-500/40 border border-gray-200 rounded-md overflow-hidden">
                     {/* Background grid */}
                     <div
                         className="absolute inset-0 opacity-[0.03] pointer-events-none mt-21.5"
@@ -130,9 +135,9 @@ export default function Hero() {
                             backgroundRepeat: 'repeat',
                         }}
                     />
-
                     {/* Top bar */}
                     <div className="px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
+                        <Noise />
                         <div className="flex items-center gap-3">
                             {/* Window dots */}
                             <div className="flex gap-1.5">
@@ -140,7 +145,7 @@ export default function Hero() {
                                 <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400" />
                                 <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-400" />
                             </div>
-                            <span className="font-mono text-xs sm:text-sm text-gray-600 ml-2">
+                            <span className="font-mono text-xs sm:text-sm text-white ml-2">
                                 DEVELOPER_PROFILE::/api/V1
                             </span>
                         </div>
@@ -167,23 +172,23 @@ export default function Hero() {
                     <div className="relative px-4 sm:px-8 py-4 sm:py-6 font-mono text-xs sm:text-sm leading-relaxed text-gray-800 w-full h-100 sm:h-112.5 overflow-auto text-left">
                         {activeTab === 'input' ? (
                             <div className="text-left">
-                                <p>
+                                <p className='text-white'>
                                     <span className="text-purple-500">const</span> developer = {'{'}
                                 </p>
                                 <div className="ml-8 mt-2 space-y-1">
-                                    <p>
+                                    <p className='text-white'>
                                         name : <span className="text-green-600">"SAHIL KADAM"</span>,
                                     </p>
-                                    <p>
+                                    <p className='text-white'>
                                         age : <span className="text-green-600">19</span>,
                                     </p>
-                                    <p>
+                                    <p className='text-white'>
                                         role : <span className="text-green-600">"Backend Developer"</span>,
                                     </p>
-                                    <p>
+                                    <p className='text-white'>
                                         location : <span className="text-green-600">"India"</span>,
                                     </p>
-                                    <p>skills : [</p>
+                                    <p className='text-white'>skills : [</p>
                                     <div className="ml-8 space-y-1">
                                         {/* <p><span className="text-green-600">"python"</span>,</p> */}
                                         <p><span className="text-green-600">"Mongoose"</span>,</p>
@@ -191,12 +196,12 @@ export default function Hero() {
                                         <p><span className="text-green-600">"Express"</span>,</p>
                                         <p><span className="text-green-600">"MongoDB"</span>,</p>
                                     </div>
-                                    <p>] ,</p>
-                                    <p>
+                                    <p className='text-white'>] ,</p>
+                                    <p className='text-white'>
                                         contact : <span className="text-green-600">"sahilkadam@gmial.com"</span>
                                     </p>
                                 </div>
-                                <p>{'}'};</p>
+                                <p className='text-white'>{'}'};</p>
                             </div>
                         ) : (
                             <div className="text-left">
@@ -204,34 +209,34 @@ export default function Hero() {
                                     <span className="text-gray-500">// Response </span>
                                     <span className="ml-2 px-2 py-0.5 bg-green-300 rounded text-sm text-green-700">200 OK</span>
                                 </p>
-                                <p>{'{'}</p>
+                                <p className='text-white'>{'{'}</p>
                                 <div className="ml-8 mt-1 space-y-1">
                                     <p>
-                                        <span className="text-purple-600">"status"</span> :{' '}
+                                        <span className="text-pink-500">"status"</span> :{' '}
                                         <span className="text-blue-600 font-semibold">200</span>,
                                     </p>
                                     <p>
-                                        <span className="text-purple-600">"message"</span> :{' '}
+                                        <span className="text-pink-500">"message"</span> :{' '}
                                         <span className="text-green-600">"Developer profile loaded successfully"</span>,
                                     </p>
                                     <p>
-                                        <span className="text-purple-600">"data"</span> : {'{'}
+                                        <span className="text-pink-600">"data"</span> : {'{'}
                                     </p>
                                     <div className="ml-8 space-y-1">
-                                        <p><span className="text-purple-600">"available"</span> : <span className="text-blue-600 font-semibold">false</span>,</p>
-                                        <p><span className="text-purple-600">"experience"</span> : <span className="text-green-600">"0 years"</span>,</p>
-                                        <p><span className="text-purple-600">"open_to_work"</span> : <span className="text-blue-600 font-semibold">false</span>,</p>
-                                        <p><span className="text-purple-600">"projects_completed"</span> : <span className="text-blue-600 font-semibold">2</span>,</p>
+                                        <p><span className="text-pink-600">"available"</span> : <span className="text-blue-600 font-semibold">false</span>,</p>
+                                        <p><span className="text-pink-600">"experience"</span> : <span className="text-green-600">"0 years"</span>,</p>
+                                        <p><span className="text-pink-600">"open_to_work"</span> : <span className="text-blue-600 font-semibold">false</span>,</p>
+                                        <p><span className="text-pink-600">"projects_completed"</span> : <span className="text-blue-600 font-semibold">2</span>,</p>
                                         <p>
-                                            <span className="text-purple-600">"github"</span> :{' '}
+                                            <span className="text-pink-600">"github"</span> :{' '}
                                             <a className="text-green-600" href="https://github.com/sahilkadampng">
                                                 github.com/sahilkadampng
                                             </a>,
                                         </p>
                                     </div>
-                                    <p>{'}'}</p>
+                                    <p className='text-white'>{'}'}</p>
                                 </div>
-                                <p>{'}'}</p>
+                                <p className='text-white'>{'}'}</p>
                             </div>
                         )}
                     </div>

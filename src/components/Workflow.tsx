@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Noise from '../components/noise'
 
 // ─── Types ────────────────────────────────────────────────────────────
 type StepKey = 'discover' | 'architect' | 'build'
@@ -250,7 +251,7 @@ function TimelineStep({
 
 function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal']; activeStep: StepKey }) {
     return (
-        <div className="font-arimo bg-white border border-gray-200 rounded-md overflow-hidden max-w-7xl mx-auto">
+        <div className="font-arimo bg-white border border-gray-200 rounded-md overflow-hidden w-full">
             {/* Top bar */}
             <div className="px-3 sm:px-6 py-3 sm:py-4 flex flex-col max-w-7xl sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
                 <div className="flex items-center gap-3">
@@ -445,56 +446,67 @@ export default function Workflow() {
     const active = stepsConfig[activeStep]
 
     return (
-        <section className="w-full px-4 sm:px-6 lg:px-0 mt-12 sm:mt-20">
-            <div className="flex flex-col lg:flex-row  items-start">
-                {/* Left side – Workflow steps */}
-                <div className="lg:w-1/2 text-left">
-                    <p className="font-mono text-xs tracking-[0.2em] text-blue-600 uppercase mb-6">
-                        Workflow V2.0
-                    </p>
+        <section className="relative w-full py-16 sm:py-24 overflow-hidden bg-white/50">
+            <Noise />
+            {/* 🔥 Responsive container */}
+            <div className="relative z-20 max-w-350 mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
-                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
-                        Request
-                        <br />
-                        <span className="flex items-center gap-3">
-                            <span className="text-gray-400 text-4xl">→</span>
-                            <span className="text-blue-600 italic">Production</span>
-                        </span>
-                    </h2>
+                <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 items-start">
 
-                    <p className="mt-6 text-gray-500 text-lg max-w-md">
-                        Shipping scalable backend systems for real-world products.
-                    </p>
+                    {/* LEFT */}
+                    <div className="w-full lg:w-1/2">
+                        <p className="font-mono text-xs tracking-[0.2em] text-blue-600 uppercase mb-6">
+                            Workflow V2.0
+                        </p>
 
-                    {/* Timeline */}
-                    <div className="mt-12 relative border-l-2 border-gray-200 space-y-2">
-                        {/* Active glow line */}
-                        <motion.div
-                            className="absolute -left-px w-0.5 bg-blue-500 rounded-full"
-                            animate={{
-                                top: `${stepOrder.indexOf(activeStep) * 33.33}%`,
-                            }}
-                            style={{ height: '33.33%' }}
-                            transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                        />
+                        <h2 className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                            Request
+                            <br />
+                            <span className="flex items-center gap-3">
+                                <span className="text-gray-400 text-4xl">→</span>
+                                <span className="text-blue-600 italic">Production</span>
+                            </span>
+                        </h2>
 
-                        {stepOrder.map((key) => (
-                            <TimelineStep
-                                key={key}
-                                config={stepsConfig[key]}
-                                isActive={activeStep === key}
-                                onClick={() => setActiveStep(key)}
+                        <p className="mt-6 text-gray-500 text-base sm:text-lg max-w-md">
+                            Shipping scalable backend systems for real-world products.
+                        </p>
+
+                        {/* Timeline */}
+                        <div className="mt-12 relative border-l-2 border-gray-200 space-y-2 pr-4">
+                            <motion.div
+                                className="absolute -left-px w-0.5 bg-blue-500 rounded-full"
+                                animate={{
+                                    top: `${stepOrder.indexOf(activeStep) * 33.33}%`,
+                                }}
+                                style={{ height: '33.33%' }}
+                                transition={{ type: 'spring', stiffness: 200, damping: 25 }}
                             />
-                        ))}
+
+                            {stepOrder.map((key) => (
+                                <TimelineStep
+                                    key={key}
+                                    config={stepsConfig[key]}
+                                    isActive={activeStep === key}
+                                    onClick={() => setActiveStep(key)}
+                                />
+                            ))}
+                        </div>
                     </div>
+
+                    {/* RIGHT */}
+                    <div className="w-full lg:w-1/2">
+                        <TerminalPanel
+                            config={active.terminal}
+                            activeStep={activeStep}
+                        />
+                    </div>
+
                 </div>
 
-                {/* Right side – Terminal panel */}
-                <div className="lg:w-1/2 w-full">
-                    <TerminalPanel config={active.terminal} activeStep={activeStep} />
-                </div>
+                {/* bottom divider */}
+                <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
             </div>
-            <div className="mt-12 my-12 h-px w-full bg-linear-to-r from-transparent via-gray-400 to-transparent" />
         </section>
     )
 }
