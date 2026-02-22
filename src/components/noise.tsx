@@ -35,7 +35,7 @@ const Noise: React.FC<NoiseProps> = ({
             canvas.height = canvasSize;
 
             canvas.style.width = '100vw';
-            canvas.style.height = '100vh';
+            canvas.style.height = '200vh';
         };
 
         const drawGrain = () => {
@@ -43,7 +43,7 @@ const Noise: React.FC<NoiseProps> = ({
             const data = imageData.data;
 
             for (let i = 0; i < data.length; i += 4) {
-                const value = Math.random() * 255;
+                const value = Math.random() * 100;
                 data[i] = value;
                 data[i + 1] = value;
                 data[i + 2] = value;

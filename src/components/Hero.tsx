@@ -73,14 +73,14 @@ export default function Hero() {
                 >
                     THE INFRASTRUCTURE
                     <br />
-                    <span className="text-gray-500">FOR MODERN APPs.</span>
+                    <span className="text-[#685AFF]">FOR MODERN APPs.</span>
                 </motion.h1>
 
                 <div className="mt-6 relative z-10 flex justify-center">
                 </div>
 
                 {/* Glass card */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
@@ -95,13 +95,13 @@ export default function Hero() {
                         RAW design and engineer the control layer behind seamless digital
                         experiences, ensuring every project is robust, scalable, and polished.
                     </p>
-                </motion.div>
+                </motion.div> */}
                 {/* Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8"
+                    className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-56"
                 >
                     <button
                         onClick={() =>

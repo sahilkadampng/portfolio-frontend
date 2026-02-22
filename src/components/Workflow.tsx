@@ -46,7 +46,7 @@ const stepsConfig: Record<StepKey, StepConfig> = {
     discover: {
         title: 'Problem Understanding',
         badge: 'DISCOVER',
-        badgeStyle: 'border border-gray-300 text-gray-500',
+        badgeStyle: 'border border-gray-300 text-gray-400',
         description:
             'Validate requirements, define DB schema, plan scalable architecture.',
         terminal: {
@@ -171,9 +171,9 @@ const itemVariants = {
 }
 
 const statusColors: Record<string, { bg: string; dot: string; text: string }> = {
-    blue: { bg: 'bg-blue-50', dot: 'bg-blue-500', text: 'text-blue-600' },
-    green: { bg: 'bg-green-50', dot: 'bg-green-500', text: 'text-green-600' },
-    amber: { bg: 'bg-amber-50', dot: 'bg-amber-500', text: 'text-amber-600' },
+    blue: { bg: 'bg-transparent', dot: 'bg-blue-500', text: 'text-[#685AFF]' },
+    green: { bg: 'bg-transparent', dot: 'bg-green-500', text: 'text-[#685AFF]' },
+    amber: { bg: 'bg-transparent', dot: 'bg-amber-500', text: 'text-[#685AFF]' },
 }
 
 // ─── Sub-components ──────────────────────────────────────────────────
@@ -215,45 +215,44 @@ function TimelineStep({
     return (
         <motion.div
             onClick={onClick}
-            className={`font-bebas relative cursor-pointer pl-8 py-4 rounded-lg transition-colors ${isActive ? 'bg-blue-50/60' : 'hover:bg-gray-50'
+            className={`font-bebas relative cursor-pointer pl-8 py-4 rounded-lg transition-colors ${isActive ? 'text-gray-400' : 'hover:text-white'
                 }`}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
         >
             {/* Timeline dot */}
-            <motion.div
+            {/* <motion.div
                 className={`absolute -left-1.25 top-6 w-2.5 h-2.5 rounded-full border-2 ${isActive
                     ? 'bg-blue-600 border-blue-600'
                     : 'bg-white border-gray-300'
                     }`}
                 animate={isActive ? { boxShadow: '0 0 12px rgba(37,99,235,0.5)' } : { boxShadow: '0 0 0px transparent' }}
                 transition={{ duration: 0.4 }}
-            />
+            /> */}
 
             <div className="flex items-center gap-3 mb-1.5">
                 <h3
-                    className={`text-lg font-extrabold uppercase tracking-wide transition-colors ${isActive ? 'text-gray-900' : 'text-gray-600'
+                    className={`text-lg font-extrabold uppercase tracking-wide transition-colors ${isActive ? 'text-white' : 'text-gray-600'
                         }`}
                 >
                     {config.title}
                 </h3>
                 <span
-                    className={`px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded ${isActive ? 'bg-blue-600 text-white' : config.badgeStyle
+                    className={`px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded border-2 ${isActive ? 'text-[#685AFF]' : config.badgeStyle
                         }`}
                 >
                     {config.badge}
                 </span>
             </div>
-            <p className="text-gray-500 text-sm">{config.description}</p>
+            <p className={`text-sm ${isActive ? 'text-gray-400' : 'text-gray-600'
+                }`}>{config.description}</p>
         </motion.div>
     )
 }
 
 function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal']; activeStep: StepKey }) {
     return (
-        <div className="font-arimo bg-white border border-gray-200 rounded-md overflow-hidden w-full">
+        <div className="font-arimo bg-[#06080b]/20 border border-gray-800 rounded-md overflow-hidden w-full">
             {/* Top bar */}
-            <div className="px-3 sm:px-6 py-3 sm:py-4 flex flex-col max-w-7xl sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
+            <div className="px-3 bg-white/90 sm:px-6 py-3 sm:py-4 flex flex-col max-w-7xl sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
                 <div className="flex items-center gap-3">
                     <div className="flex gap-1.5">
                         <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-400" />
@@ -269,7 +268,7 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
                     key={config.stepLabel}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase border border-blue-500 text-blue-600 rounded"
+                    className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase border border-[#685AFF] text-[#685AFF] rounded"
                 >
                     {config.stepLabel}
                 </motion.span>
@@ -286,16 +285,16 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
             <div className="px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <motion.span
-                        className="w-2 h-2 rounded-full bg-blue-500"
+                        className="w-2 h-2 rounded-full bg-[#685AFF]"
                         animate={{ scale: [1, 1.4, 1] }}
                         transition={{ duration: 0 / 0, repeat: Infinity }}
                     />
-                    <span className="font-bebas text-xs font-bold text-gray-900 tracking-wider uppercase">
+                    <span className="font-bebas text-xs font-bold text-[#685AFF] tracking-wider uppercase">
                         {config.leftTitle}
                     </span>
                     <BlinkingCursor />
                 </div>
-                <span className="font-bebas text-xs text-gray-400">
+                <span className="font-bebas text-xs text-gray-200">
                     {String(stepOrder.indexOf(activeStep) + 1).padStart(2, '0')} / {String(stepOrder.length).padStart(2, '0')}
                 </span>
             </div>
@@ -315,7 +314,7 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
                         <div className="flex flex-col gap-4 sm:gap-6 w-full sm:w-1/2"> {/* use 1/2 instead of 5/5 */}
                             {/* Validation items */}
                             <div>
-                                <p className="font-bebas text-[10px] tracking-wider text-gray-400 uppercase mb-3">
+                                <p className="font-bebas text-[10px] tracking-wider text-gray-200 uppercase mb-3">
                                     {config.leftTitle}
                                 </p>
                                 <div className="space-y-2">
@@ -326,7 +325,7 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
                                             variants={itemVariants}
                                             initial="initial"
                                             animate="animate"
-                                            className="px-4 py-2.5 border border-gray-200 rounded-lg font-bebas text-sm text-gray-700 flex items-center gap-2"
+                                            className="px-4 py-2.5 border border-gray-900 rounded-lg font-bebas text-sm text-gray-500 flex items-center gap-2"
                                         >
                                             <motion.span
                                                 initial={{ scale: 0 }}
@@ -344,7 +343,7 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
 
                             {/* Processing steps */}
                             <div>
-                                <p className="font-bebas text-[10px] tracking-wider text-gray-400 uppercase mb-3">
+                                <p className="font-bebas text-[10px] tracking-wider text-gray-200 uppercase mb-3">
                                     {config.rightTitle}
                                 </p>
                                 <div className="space-y-2">
@@ -357,10 +356,10 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
                                             animate="animate"
                                             className="flex items-center gap-3"
                                         >
-                                            <span className="w-5 h-5 rounded bg-gray-100 text-[10px] font-bold text-gray-500 flex items-center justify-center shrink-0">
+                                            <span className="w-5 h-5 rounded bg-gray-700 text-[10px] font-bold text-gray-400 flex items-center justify-center shrink-0">
                                                 {item.step}
                                             </span>
-                                            <span className="font-bebas text-sm text-gray-700">{item.label}</span>
+                                            <span className="font-bebas text-sm text-gray-500">{item.label}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -368,13 +367,13 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
                         </div>
 
                         {/* Divider */}
-                        <div className="hidden sm:block w-px bg-pink-600" />
+                        <div className="hidden sm:block w-px bg-[#685AFF]" />
 
                         {/* Right panel — code snippet */}
                         <div className="flex-1 min-w-0 w-full sm:w-1/2"> {/* ensure right panel doesn't overflow */}
                             {/* header */}
                             <div className="flex items-center justify-between mb-3">
-                                <p className="font-bebas text-[10px] tracking-wider text-gray-400 uppercase">
+                                <p className="font-bebas text-[10px] tracking-wider text-gray-200 uppercase">
                                     Source Preview
                                 </p>
                                 <span className="font-bebas text-[10px] text-pink-500">.ts</span>
@@ -408,7 +407,7 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
             </AnimatePresence>
 
             {/* Bottom status bar */}
-            <div className="font-arimo px-3 sm:px-6 py-3 border-t border-gray-100 flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="font-arimo px-3 bg-gray-600/20 sm:px-6 py-3 border-t border-gray-100 flex flex-wrap items-center gap-3 sm:gap-4">
                 <p className="font-bebas text-[10px] tracking-wider text-gray-400 uppercase mr-2">
                     Status
                 </p>
@@ -446,7 +445,7 @@ export default function Workflow() {
     const active = stepsConfig[activeStep]
 
     return (
-        <section className="relative w-full py-16 sm:py-24 overflow-hidden bg-white/50">
+        <section className="relative w-full py-16 sm:py-24 overflow-hidden bg-[#06080b]">
             <Noise />
             {/* 🔥 Responsive container */}
             <div className="relative z-20 max-w-350 mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
@@ -455,27 +454,27 @@ export default function Workflow() {
 
                     {/* LEFT */}
                     <div className="w-full lg:w-1/2">
-                        <p className="font-mono text-xs tracking-[0.2em] text-blue-600 uppercase mb-6">
+                        <p className="font-mono text-xs tracking-[0.2em] text-[#685AFF] uppercase mb-6">
                             Workflow V2.0
                         </p>
 
-                        <h2 className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight">
+                        <h2 className="text-xl sm:text-xl md:text-2xl xl:text-5xl font-arimo text-white uppercase leading-tight tracking-tight">
                             Request
                             <br />
-                            <span className="flex items-center gap-3">
-                                <span className="text-gray-400 text-4xl">→</span>
-                                <span className="text-blue-600 italic">Production</span>
+                            <span className="flex items-left gap-3">
+                                <span className="text-gray-400 text-4xl mt-2">→</span>
+                                <span className="text-[#685AFF]">Production</span>
                             </span>
                         </h2>
 
-                        <p className="mt-6 text-gray-500 text-base sm:text-lg max-w-md">
+                        <p className="mt-6 text-gray-500 text-base sm:text-md max-w-md">
                             Shipping scalable backend systems for real-world products.
                         </p>
 
                         {/* Timeline */}
-                        <div className="mt-12 relative border-l-2 border-gray-200 space-y-2 pr-4">
+                        <div className="mt-12 relative border-l-2 border-white space-y-2 pr-4">
                             <motion.div
-                                className="absolute -left-px w-0.5 bg-blue-500 rounded-full"
+                                className="absolute -left-px w-0.5 bg-[#685AFF] rounded-full"
                                 animate={{
                                     top: `${stepOrder.indexOf(activeStep) * 33.33}%`,
                                 }}
@@ -505,7 +504,7 @@ export default function Workflow() {
                 </div>
 
                 {/* bottom divider */}
-                <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
+                {/* <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" /> */}
             </div>
         </section>
     )

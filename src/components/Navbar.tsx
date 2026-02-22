@@ -6,7 +6,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm bg-white/10 border-b border-gray-300">
+        <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm bg-black/40 border-b border-gray-300">
             <div className="max-w-7xl mx-auto px-6 py-4 relative flex items-center justify-between">
                 {/* LEFT → LOGO */}
                 <Link to="/" className="font-arimo text-xl font-bold text-white">

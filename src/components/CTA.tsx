@@ -55,7 +55,7 @@ export default function CTA() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight text-[#3b5bdb] uppercase"
+                    className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight text-[#685AFF] uppercase"
                 >
                     With Confidence.
                 </motion.h2>
@@ -105,7 +105,7 @@ export default function CTA() {
                     <button
                         onClick={handleSubmit}
                         disabled={submitting || !email}
-                        className="w-full sm:w-auto px-8 py-3.5 bg-[#3b5bdb] hover:bg-[#364fc7] disabled:bg-gray-300 text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer font-arimo whitespace-nowrap flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto px-8 py-3.5 bg-[#685AFF] hover:bg-[#364fc7] disabled:bg-gray-300 text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer font-arimo whitespace-nowrap flex items-center justify-center gap-2"
                     >
                         {submitting ? (
                             <>
@@ -132,7 +132,7 @@ export default function CTA() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                     href="/docs"
-                    className="mt-5 text-[#3b5bdb] text-sm font-medium font-arimo hover:underline flex items-center gap-1 transition"
+                    className="mt-5 text-[#685AFF] text-sm font-medium font-arimo hover:underline flex items-center gap-1 transition"
                 >
                     Explore Documentation
                     <span className="text-xs">→</span>

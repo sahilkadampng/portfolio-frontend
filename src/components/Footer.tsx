@@ -16,9 +16,9 @@ const platformLinks = [
 
 export default function Footer() {
     return (
-        <footer className="max-w-7xl bg-linear-to-r from-[#f4f6fb] via-white to-[#f4f6fb]">
+        <footer className="w-full bg-[#000000]">
             {/* Main footer content */}
-            <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 pt-12 pb-8">
+            <div className="w-full mx-auto px-0 sm:px-10 md:px-16 pt-12 pb-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4">
                     {/* Left — Connect */}
                     <div className='mt-3'>
@@ -27,7 +27,7 @@ export default function Footer() {
                                 <li key={link.label}>
                                     <a
                                         href={link.href}
-                                        className="flex items-center gap-2.5 text-sm text-gray-700 hover:text-gray-900 transition font-arimo"
+                                        className="flex items-center gap-2.5 text-sm text-gray-700 hover:text-gray-400 transition font-arimo"
                                     >
                                         <link.icon className="w-4 h-4 text-gray-500" />
                                         {link.label}
@@ -40,7 +40,7 @@ export default function Footer() {
                     {/* Center — Status */}
                     <div className="flex flex-col items-start md:items-center">
                         <div className="flex items-center gap-2 mb-2">
-                            <a className="text-2xl font-extrabold tracking-[0.15em] text-gray-800 uppercase mt-10" href='#'>
+                            <a className="text-2xl font-extrabold tracking-[0.15em] text-gray-800 hover:text-[#685AFF] uppercase mt-10" href='#'>
                                 RAW
                             </a>
                         </div>
@@ -60,8 +60,8 @@ export default function Footer() {
                                     <Link
                                         to={link.to}
                                         className={`text-sm transition font-arimo ${i === 0
-                                                ? 'text-gray-700 hover:text-gray-900'
-                                                : 'text-[#3b5bdb] hover:text-[#364fc7]'
+                                                ? 'text-[#685AFF] hover:text-[#364fc7]'
+                                                : 'text-[#685AFF] hover:text-[#364fc7]'
                                             }`}
                                     >
                                         {link.label}
@@ -74,12 +74,12 @@ export default function Footer() {
             </div>
 
             {/* Bottom bar */}
-            <div className="border-t border-gray-200">
-                <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="border-t border-gray-900">
+                <div className="w-full mx-auto px-6 sm:px-10 md:px-16 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <p className="text-xs font-mono tracking-[0.15em] text-gray-600 uppercase">
                         © 2026 RAW
                     </p>
-                    <div className="flex items-center gap-6">
+                    {/* <div className="flex items-center gap-6">
                         <a
                             href="#"
                             className="text-xs font-mono tracking-[0.15em] text-gray-600 uppercase hover:text-gray-700 transition"
@@ -92,7 +92,7 @@ export default function Footer() {
                         >
                             Terms
                         </a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>

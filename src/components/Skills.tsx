@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import clr from "../assets/CLR.jpg";
 import db from "../assets/db.jpg";
+import Noise from '../components/noise'
 // import support from "../assets/support.jpg";
 
 export default function Skills() {
     const categories = [
         {
             tag: "Core: Languages",
-            tagColor: "text-blue-600",
+            tagColor: "text-[#685AFF]",
             image: clr,
             title: "Languages & Runtime",
             skills: [
@@ -19,7 +20,7 @@ export default function Skills() {
         },
         {
             tag: "Core: Frameworks",
-            tagColor: "text-blue-600",
+            tagColor: "text-[#685AFF]",
             title: "Frameworks & Libraries",
             skills: [
                 { name: "React", level: "Basic" },
@@ -29,14 +30,14 @@ export default function Skills() {
         },
         {
             tag: "Core: Database",
-            tagColor: "text-gray-500",
+            tagColor: "text-[#685AFF]",
             image: db,
             title: "Database & Storage",
             skills: [{ name: "MongoDB", level: "Intermediate" }],
         },
         {
             tag: "Core: DevOps",
-            tagColor: "text-gray-500",
+            tagColor: "text-[#685AFF]",
             title: "DevOps & Tools",
             skills: [
                 { name: "Git & GitHub", level: "Advanced" },
@@ -47,81 +48,84 @@ export default function Skills() {
     ];
 
     const levelColor: Record<string, string> = {
-        Advanced: "text-green-600 bg-green-50 border-green-200",
-        Intermediate: "text-blue-600 bg-blue-50 border-blue-200",
-        Basic: "text-yellow-600 bg-yellow-50 border-yellow-200",
-        "Not started": "text-gray-500 bg-gray-50 border-gray-200",
+        Advanced: "text-green-600 bg-transperent border-gray-700",
+        Intermediate: "text-blue-600 bg-transperent border-gray-700",
+        Basic: "text-yellow-600 bg-transperent border-gray-700",
+        "Not started": "text-gray-500 bg-transperent border-gray-700",
     };
 
     return (
-        <section className="py-20 sm:py-28 px-4 sm:px-6 bg-[#f4f6fb] -mt-38">
+        <section className="relative overflow-hidden w-full py-20 sm:py-28 px-4 sm:px-6 bg-[#06080b]">
             <div className="max-w-6xl mx-auto text-center">
-                {/* Top badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="flex items-center justify-center gap-3 mb-8"
-                >
-                    <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-500 uppercase">
-                        Stack :: Overview
-                    </span>
-                    <span className="w-12 h-px bg-gray-300" />
-                    <span className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400">
-                        Technical Proficiency
-                    </span>
-                </motion.div>
+                <div className="max-w-6xl mx-auto text-center">
+                    <Noise />
+                    {/* Top badge */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="flex items-center justify-center gap-3 mb-8"
+                    >
+                        <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase">
+                            Stack :: Overview
+                        </span>
+                        <span className="w-12 h-px bg-gray-300" />
+                        <span className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400">
+                            Technical Proficiency
+                        </span>
+                    </motion.div>
 
-                {/* Heading */}
-                <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: 0.1 }}
-                    className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
-                >
-                    Technical
-                    <br />
-                    <span className="text-blue-600 italic">Skills...</span>
-                </motion.h2>
+                    {/* Heading */}
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7, delay: 0.1 }}
+                        className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-white uppercase leading-tight tracking-tight"
+                    >
+                        Technical
+                        <br />
+                        <span className="text-[#685AFF]">Skills</span>
+                    </motion.h2>
 
-                {/* Description */}
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto"
-                >
-                    Every tool in the stack is chosen for production reliability. From
-                    database design to deployment pipelines — built to scale, secured by
-                    default.
-                </motion.p>
+                    {/* Description */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="mt-6 text-gray-500 text-base sm:text-lg max-w-2xl mx-auto"
+                    >
+                        Every tool in the stack is chosen for production reliability. From
+                        database design to deployment pipelines — built to scale, secured by
+                        default.
+                    </motion.p>
 
-                {/* Stats */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
-                >
-                    {[
-                        { value: "5", label: "Technologies" },
-                        { value: "Backend", label: "Coverage" },
-                        { value: "Production", label: "Grade" },
-                    ].map((stat) => (
-                        <div key={stat.label} className="px-6 sm:px-10 py-2 text-center">
-                            <p className="text-2xl sm:text-3xl font-bold text-gray-900">
-                                {stat.value}
-                            </p>
-                            <p className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400 uppercase mt-1">
-                                {stat.label}
-                            </p>
-                        </div>
-                    ))}
-                </motion.div>
+                    {/* Stats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
+                    >
+                        {[
+                            { value: "5", label: "Technologies" },
+                            { value: "Backend", label: "Coverage" },
+                            { value: "Production", label: "Grade" },
+                        ].map((stat) => (
+                            <div key={stat.label} className="px-6 sm:px-10 py-2 text-center">
+                                <p className="text-2xl sm:text-3xl font-bold text-gray-200">
+                                    {stat.value}
+                                </p>
+                                <p className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400 uppercase mt-1">
+                                    {stat.label}
+                                </p>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
 
                 {/* Cards */}
                 <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -132,7 +136,7 @@ export default function Skills() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="bg-white border border-gray-200 rounded-xl p-6 text-left flex flex-col justify-between min-h-80 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                            className="bg-[#0d0e0f] border border-gray-900 rounded-xl p-6 text-left flex flex-col justify-between min-h-80 hover:shadow-lg"
                         >
                             <div>
                                 {/* Header */}
@@ -159,7 +163,7 @@ export default function Skills() {
                                         </div>
                                     )}
 
-                                    <h3 className="text-lg font-extrabold text-gray-900 tracking-tight mb-4">
+                                    <h3 className="text-lg font-extrabold text-gray-100 tracking-tight mb-4">
                                         {cat.title}
                                     </h3>
                                 </div>
@@ -169,9 +173,9 @@ export default function Skills() {
                                     {cat.skills.map((skill) => (
                                         <div
                                             key={skill.name}
-                                            className="flex items-center justify-between px-3 py-2 border border-gray-100 rounded-lg"
+                                            className="flex items-center justify-between px-3 py-2 border border-gray-900 rounded-lg"
                                         >
-                                            <span className="font-mono text-sm text-gray-700">
+                                            <span className="font-mono text-sm text-gray-100">
                                                 {skill.name}
                                             </span>
                                             <span
@@ -190,10 +194,10 @@ export default function Skills() {
                 </div>
 
                 {/* Divider */}
-                <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
+                {/* <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" /> */}
 
                 {/* Bottom */}
-                <p className="mt-8 font-mono text-[10px] sm:text-xs tracking-[0.2em] text-blue-600 uppercase">
+                <p className="mt-8 font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase">
                     Focused on backend systems.
                 </p>
             </div>
