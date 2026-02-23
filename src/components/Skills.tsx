@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import clr from "../assets/CLR.jpg";
 import db from "../assets/db.jpg";
-import Noise from '../components/noise'
+// import Noise from '../components/noise'
 // import support from "../assets/support.jpg";
 
 export default function Skills() {
@@ -48,17 +48,17 @@ export default function Skills() {
     ];
 
     const levelColor: Record<string, string> = {
-        Advanced: "text-green-600 bg-transperent border-gray-700",
-        Intermediate: "text-blue-600 bg-transperent border-gray-700",
-        Basic: "text-yellow-600 bg-transperent border-gray-700",
-        "Not started": "text-gray-500 bg-transperent border-gray-700",
+        Advanced: "text-gray-400 bg-transperent border-gray-700",
+        Intermediate: "text-gray-400 bg-transperent border-gray-700",
+        Basic: "text-gray-400 bg-transperent border-gray-700",
+        "Not started": "text-gray-400 bg-transperent border-gray-700",
     };
 
     return (
         <section className="relative overflow-hidden w-full py-20 sm:py-28 px-4 sm:px-6 bg-[#06080b]">
             <div className="max-w-6xl mx-auto text-center">
                 <div className="max-w-6xl mx-auto text-center">
-                    <Noise />
+                    {/* <Noise /> */}
                     {/* Top badge */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -108,14 +108,14 @@ export default function Skills() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="mt-12 flex flex-wrap justify-center divide-x divide-gray-200"
+                        className="mt-12 flex flex-wrap justify-center divide-x divide-gray-800"
                     >
                         {[
                             { value: "5", label: "Technologies" },
                             { value: "Backend", label: "Coverage" },
                             { value: "Production", label: "Grade" },
                         ].map((stat) => (
-                            <div key={stat.label} className="px-6 sm:px-10 py-2 text-center">
+                            <div key={stat.label} className="px-10 sm:px-10 py-2 text-center">
                                 <p className="text-2xl sm:text-3xl font-bold text-gray-200">
                                     {stat.value}
                                 </p>

@@ -17,6 +17,14 @@ body {
     margin: 0;
 }
 
+.traffic-btn {
+    @apply relative flex items-center justify-center w-3 h-3 rounded-full shadow-inner cursor-pointer;
+}
+
+.traffic-icon {
+    @apply text-[8px] text-black opacity-0 group-hover:opacity-100 transition;
+}
+
 html {
     scroll-behavior: smooth;
 }

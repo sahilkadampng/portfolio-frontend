@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Noise from '../components/noise'
+// import Noise from '../components/noise'
 
 // ─── Types ────────────────────────────────────────────────────────────
 type StepKey = 'discover' | 'architect' | 'build'
@@ -215,44 +215,42 @@ function TimelineStep({
     return (
         <motion.div
             onClick={onClick}
-            className={`font-bebas relative cursor-pointer pl-8 py-4 rounded-lg transition-colors ${isActive ? 'text-gray-400' : 'hover:text-white'
+            className={`font-bebas relative cursor-pointer py-4 rounded-lg transition-colors ${isActive ? 'shadow-pink-500' : 'hover:text-pink-500'
                 }`}
         >
-            {/* Timeline dot */}
-            {/* <motion.div
-                className={`absolute -left-1.25 top-6 w-2.5 h-2.5 rounded-full border-2 ${isActive
-                    ? 'bg-blue-600 border-blue-600'
-                    : 'bg-white border-gray-300'
-                    }`}
-                animate={isActive ? { boxShadow: '0 0 12px rgba(37,99,235,0.5)' } : { boxShadow: '0 0 0px transparent' }}
-                transition={{ duration: 0.4 }}
-            /> */}
+            <div className="pl-0 lg:pl-8 sm:pl-4">
+                <div className="flex items-center gap-3 mb-1.5 justify-start">
+                    <h3
+                        className={`text-lg font-extrabold uppercase tracking-wide transition-colors flex justify-start ${isActive ? 'text-white' : 'text-gray-600'
+                            }`}
+                    >
+                        {config.title}
+                    </h3>
 
-            <div className="flex items-center gap-3 mb-1.5">
-                <h3
-                    className={`text-lg font-extrabold uppercase tracking-wide transition-colors ${isActive ? 'text-white' : 'text-gray-600'
+                    <span
+                        className={`px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded border-2 ${isActive ? 'text-[#685AFF]' : config.badgeStyle
+                            }`}
+                    >
+                        {config.badge}
+                    </span>
+                </div>
+
+                <p
+                    className={`text-sm flex justify-start ${isActive ? 'text-gray-400' : 'text-gray-600'
                         }`}
                 >
-                    {config.title}
-                </h3>
-                <span
-                    className={`px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded border-2 ${isActive ? 'text-[#685AFF]' : config.badgeStyle
-                        }`}
-                >
-                    {config.badge}
-                </span>
+                    {config.description}
+                </p>
             </div>
-            <p className={`text-sm ${isActive ? 'text-gray-400' : 'text-gray-600'
-                }`}>{config.description}</p>
         </motion.div>
     )
 }
 
 function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal']; activeStep: StepKey }) {
     return (
-        <div className="font-arimo bg-[#06080b]/20 border border-gray-800 rounded-md overflow-hidden w-full">
+        <div className="font-arimo mt-20 bg-[#06080b]/20 border border-gray-800 rounded-md overflow-hidden w-full">
             {/* Top bar */}
-            <div className="px-3 bg-white/90 sm:px-6 py-3 sm:py-4 flex flex-col max-w-7xl sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
+            <div className="px-3 bg-[#121212] sm:px-6 py-3 sm:py-4 flex flex-col max-w-7xl sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-[#121212">
                 <div className="flex items-center gap-3">
                     <div className="flex gap-1.5">
                         <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-400" />
@@ -275,9 +273,9 @@ function TerminalPanel({ config, activeStep }: { config: StepConfig['terminal'];
             </div>
 
             {/* Grid decoration */}
-            <div className="h-2 bg-gray-50 border-b border-gray-100 flex">
+            <div className="h-2 bg-[#121212] border-b border-[#121212] flex">
                 {[...Array(12)].map((_, i) => (
-                    <div key={i} className="flex-1 border-r border-gray-100" />
+                    <div key={i} className="flex-1 border-r border-[#121212]" />
                 ))}
             </div>
 
@@ -446,11 +444,11 @@ export default function Workflow() {
 
     return (
         <section className="relative w-full py-16 sm:py-24 overflow-hidden bg-[#06080b]">
-            <Noise />
+            {/* <Noise /> */}
             {/* 🔥 Responsive container */}
-            <div className="relative z-20 max-w-350 mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
+            <div className="relative z-20 max-w-350 mx-auto px-0 sm:px-6 lg:px-10 xl:px-16">
 
-                <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 items-start">
+                <div className="flex flex-col lg:flex-row gap-0 xl:gap-16 items-start px-4 lg:px-16">
 
                     {/* LEFT */}
                     <div className="w-full lg:w-1/2">
@@ -458,16 +456,18 @@ export default function Workflow() {
                             Workflow V2.0
                         </p>
 
-                        <h2 className="text-xl sm:text-xl md:text-2xl xl:text-5xl font-arimo text-white uppercase leading-tight tracking-tight">
-                            Request
+                        <h2 className="text-xl justify-start sm:text-xl md:text-2xl xl:text-5xl font-arimo text-white uppercase leading-tight tracking-tight">
+                            <p className='-mb-6 lg:-mb-16 flex justify-start'>
+                                Request
+                            </p>
                             <br />
                             <span className="flex items-left gap-3">
-                                <span className="text-gray-400 text-4xl mt-2">→</span>
+                                <span className="text-gray-400 text-4xl lg:mt-2 -mt-1.5">→</span>
                                 <span className="text-[#685AFF]">Production</span>
                             </span>
                         </h2>
 
-                        <p className="mt-6 text-gray-500 text-base sm:text-md max-w-md">
+                        <p className="mt-6 text-gray-500 text-base sm:text-md max-w-md flex justify-start">
                             Shipping scalable backend systems for real-world products.
                         </p>
 

@@ -60,13 +60,13 @@ export default function Solutions() {
             <Navbar />
             <main className="bg-[#f4f6fb] min-h-screen">
                 {/* Hero */}
-                <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
+                <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6 bg-[#121212]">
                     <div className="max-w-6xl mx-auto text-center">
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6"
+                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-[#685AFF] uppercase mb-6"
                         >
                             ● Solutions :: Catalog ●
                         </motion.p>
@@ -74,9 +74,9 @@ export default function Solutions() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.1 }}
-                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-100 uppercase leading-tight tracking-tight"
                         >
-                            What I <span className="text-blue-600 italic">Build.</span>
+                            What I <span className="text-[#685AFF]">Build.</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,7 @@ export default function Solutions() {
                             className="flex flex-wrap justify-center gap-3 mt-8"
                         >
                             {['Full-Stack', 'API-First', 'Production-Ready'].map((tag) => (
-                                <span key={tag} className="px-4 py-1.5 border border-gray-300 rounded-md font-mono text-[10px] sm:text-xs tracking-wider text-gray-600 uppercase">
+                                <span key={tag} className="px-4 py-1.5 border border-gray-700 rounded-md font-mono text-[10px] sm:text-xs tracking-wider text-gray-600 uppercase">
                                     {tag}
                                 </span>
                             ))}
@@ -105,7 +105,7 @@ export default function Solutions() {
                 </section>
 
                 {/* Solutions Grid */}
-                <section className="px-4 sm:px-6 pb-20">
+                <section className="px-4 sm:px-6 pb-20 bg-[#121212]">
                     <div className="max-w-6xl mx-auto">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {solutions.map((sol, i) => (
@@ -115,7 +115,7 @@ export default function Solutions() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 text-left flex flex-col justify-between min-h-70 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    className="bg-[#181818] border border-gray-700 rounded-xl p-6 sm:p-8 text-left flex flex-col justify-between min-h-70 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                                 >
                                     <div>
                                         <div className="flex items-center justify-between mb-5">
@@ -124,7 +124,7 @@ export default function Solutions() {
                                             </span>
                                             <span className="font-mono text-xs text-gray-300">{String(i + 1).padStart(2, '0')}</span>
                                         </div>
-                                        <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 uppercase tracking-tight mb-3">
+                                        <h3 className="text-lg sm:text-xl font-extrabold text-[#685AFF] uppercase tracking-tight mb-3">
                                             {sol.title}
                                         </h3>
                                         <p className="text-gray-500 text-sm leading-relaxed mb-4">
@@ -133,7 +133,7 @@ export default function Solutions() {
                                     </div>
                                     <div className="flex flex-wrap gap-2">
                                         {sol.features.map((f) => (
-                                            <span key={f} className="px-2.5 py-1 border border-gray-100 rounded-md font-mono text-[10px] tracking-wider text-gray-500 uppercase">
+                                            <span key={f} className="px-2.5 py-1 border border-gray-700 rounded-md font-mono text-[10px] tracking-wider text-gray-500 uppercase">
                                                 {f}
                                             </span>
                                         ))}
@@ -145,14 +145,14 @@ export default function Solutions() {
                 </section>
 
                 {/* Process */}
-                <section className="px-4 sm:px-6 pb-20">
+                <section className="pt-32 px-4 sm:px-6 pb-20 bg-[#181818]">
                     <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-12">
-                            <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-4">
+                            <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase mb-4">
                                 Process :: Pipeline
                             </p>
-                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
-                                How It <span className="text-blue-600 italic">Ships.</span>
+                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-100 uppercase tracking-tight">
+                                How It <span className="text-[#685AFF]">Ships.</span>
                             </h2>
                         </div>
 
@@ -164,13 +164,13 @@ export default function Solutions() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    className="bg-[#121212] border border-gray-700 rounded-xl p-6 sm:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                                 >
                                     <div className="flex items-center gap-4 mb-4">
-                                        <span className="w-10 h-10 rounded-lg bg-[#f4f6fb] border border-gray-200 flex items-center justify-center font-mono text-sm font-bold text-gray-400">
+                                        <span className="w-10 h-10 rounded-lg bg-[#1f1f1f] border border-gray-700 flex items-center justify-center font-mono text-sm font-bold text-gray-400">
                                             {s.step}
                                         </span>
-                                        <h3 className="text-lg font-extrabold text-gray-900 uppercase tracking-tight">{s.title}</h3>
+                                        <h3 className="text-lg font-extrabold text-[#685AFF] uppercase tracking-tight">{s.title}</h3>
                                     </div>
                                     <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
                                 </motion.div>
@@ -178,8 +178,8 @@ export default function Solutions() {
                         </div>
 
                         {/* Divider */}
-                        <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
-                        <p className="mt-8 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-blue-600 uppercase">
+                        {/* <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" /> */}
+                        <p className="mt-8 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase">
                             Every layer. Production grade.
                         </p>
                     </div>

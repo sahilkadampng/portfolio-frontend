@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Silk from '../components/silkbg'
-import Noise from '../components/noise'
+// import Noise from '../components/noise'
 
 const image = '/download.png'
 
@@ -107,7 +107,7 @@ export default function Hero() {
                         onClick={() =>
                             document.getElementById("CTA")?.scrollIntoView({ behavior: "smooth" })
                         }
-                        className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-lg cursor-pointer"
+                        className="px-8 py-3 rounded-lg bg-[#685AFF] text-white font-medium hover:bg-[#5040ff] transition shadow-lg cursor-pointer"
                     >
                         Get in touch
                     </button>
@@ -137,7 +137,7 @@ export default function Hero() {
                     />
                     {/* Top bar */}
                     <div className="px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-b border-gray-100">
-                        <Noise />
+                        {/* <Noise /> */}
                         <div className="flex items-center gap-3">
                             {/* Window dots */}
                             <div className="flex gap-1.5">

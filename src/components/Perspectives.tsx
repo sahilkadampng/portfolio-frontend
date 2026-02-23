@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import Noise from '../components/noise'
+// import Noise from '../components/noise'
 
 export default function Perspectives() {
     return (
         <section className="relative overflow-hidden w-full py-20 sm:py-28 px-4 sm:px-6 bg-[#111214] -mt-28">
-            <Noise />
+            {/* <Noise /> */}
             <div className="max-w-6xl mx-auto">
                 {/* Top features row */}
                 <div className="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-0 md:divide-x divide-gray-600">
@@ -25,7 +25,7 @@ export default function Perspectives() {
                                 {item.num}
                             </span>
                             <div>
-                                <h4 className="font-mono text-sm font-bold text-[#685AFF] uppercase tracking-wide">
+                                <h4 className="font-mono text-sm flex font-bold text-[#685AFF] uppercase tracking-wide">
                                     {item.title}
                                 </h4>
                                 <p className="text-gray-500 text-sm mt-0.5">{item.desc}</p>
@@ -41,7 +41,7 @@ export default function Perspectives() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-16 sm:mt-20 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-500 uppercase"
+                    className="mt-10 sm:mt-20 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-500 uppercase"
                 >
                     <span className='text-[#685AFF]'>Two perspectives</span>: backend config vs. the consumer's experience.
                 </motion.p>
@@ -102,7 +102,7 @@ export default function Perspectives() {
                             <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 uppercase tracking-tight mb-2">
                                 Total Control
                             </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed">
+                            <p className="text-gray-100 text-sm leading-relaxed">
                                 You define the validation rules, methods, and schemas.
                                 <br />
                                 The complexity is managed by the developer
@@ -113,7 +113,7 @@ export default function Perspectives() {
                     {/* Consumer View */}
                     <div className="p-6 sm:p-10 flex flex-col justify-between">
                         <div>
-                            <span className="inline-block px-3 py-1 border border-gray-300 text-[10px] sm:text-xs font-bold tracking-wider uppercase text-gray-500 rounded mb-8">
+                            <span className="inline-block px-3 py-1 border border-gray-300 text-[10px] sm:text-xs font-bold tracking-wider uppercase text-white rounded mb-8">
                                 Consumer View
                             </span>
 
@@ -182,7 +182,7 @@ export default function Perspectives() {
                             <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 uppercase tracking-tight mb-2">
                                 Predictable Response
                             </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed">
+                            <p className="text-gray-100 text-sm leading-relaxed">
                                 consumers interact with a clean, fast, and
                                 documented product that just works.
                             </p>

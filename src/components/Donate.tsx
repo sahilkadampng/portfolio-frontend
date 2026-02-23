@@ -130,7 +130,7 @@ function SupporterTicker({ supporters }: { supporters: Supporter[] }) {
     const timeAgo = getTimeAgo(supporter.createdAt);
 
     return (
-        <div className="h-6 overflow-hidden">
+        <div className="min-h-6 overflow-hidden">
             <AnimatePresence mode="wait">
                 <motion.p
                     key={`${supporter._id}-${index}`}
@@ -195,7 +195,7 @@ function SuccessModal({ name, amount, onClose }: { name: string; amount: number;
                     </p>
                 </div>
                 {/* TERMINAL BODY */}
-                <div className="font-mono text-sm text-green-400 p-6 space-y-2">
+                <div className="font-mono text-sm text-[#685AFF] p-6 space-y-2">
                     <p>
                         <span className="text-gray-500">$</span> initiating payment verification...
                     </p>
@@ -317,7 +317,7 @@ export default function Donate() {
     return (
         <>
             <Navbar />
-            <section id="donate" className="w-full bg-[#f4f6fb] py-20 md:py-28 px-4 flex flex-col items-center scroll-mt-32 relative overflow-hidden">
+            <section id="donate" className="w-full bg-[#121212] py-20 md:py-28 px-4 flex flex-col items-center scroll-mt-32 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.05]" style={{
                     backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
                     backgroundSize: '60px 60px'
@@ -333,8 +333,12 @@ export default function Donate() {
                     transition={{ duration: 0.7 }}
                     className="text-center mb-12 relative z-10"
                 >
-                    <h2 className="text-4xl font-extrabold sm:text-5xl md:text-6xl text-gray-900 uppercase flex gap-6 tracking-tight">
-                        Support <span className="text-blue-600">Me</span><img src={supportimage} height='40px' width='70px'></img>
+                    <h2 className="text-4xl font-extrabold pt-4 sm:text-5xl md:text-6xl text-gray-100 uppercase flex justify-center gap-6 tracking-tight">
+                        Support<span className="text-[#685AFF] -ml-3">Me</span><img
+                            src={supportimage}
+                            className="-ml-3 w-10 sm:w-14 md:w-16 h-auto"
+                            alt="support"
+                        />
                     </h2>
                     <p className="mt-4 text-gray-400 text-base sm:text-lg font-arimo max-w-lg mx-auto">
                         If my work has helped you, consider buying me a coffee. Every contribution fuels the next build.
@@ -377,7 +381,7 @@ export default function Donate() {
                         </div>
 
                         {/* Editor body */}
-                        <div className="bg-[#ffffff] px-6 sm:px-8 py-7 font-mono text-[13px] leading-relaxed">
+                        <div className="bg-[#0d1117] px-6 sm:px-8 py-7 font-mono text-[13px] leading-relaxed">
                             {/* Line numbers gutter + code */}
                             <div className="flex gap-5">
                                 {/* Line numbers */}
@@ -396,12 +400,12 @@ export default function Donate() {
 
                                     {/* Line 2: import */}
                                     <p className="h-6.5 flex items-center">
-                                        <span className="text-purple-500">import</span>
+                                        <span className="text-purple-400">import</span>
                                         <span className="text-gray-800 ml-1"> {' { '}</span>
-                                        <span className="text-blue-600 ml-1">razorpay</span>
+                                        <span className="text-blue-400 ml-1">razorpay</span>
                                         <span className="text-gray-800 ml-1">{' }'} </span>
-                                        <span className="text-purple-500 ml-1"> from </span>
-                                        <span className="text-green-600 ml-1">  &apos;@payments&apos; </span>
+                                        <span className="text-purple-400 ml-1"> from </span>
+                                        <span className="text-[#685AFF] ml-1">  &apos;@payments&apos; </span>
                                         <span className="text-gray-400">;</span>
                                     </p>
 
@@ -410,10 +414,10 @@ export default function Donate() {
 
                                     {/* Line 4: const amount label */}
                                     <p className="h-6.5 flex items-center">
-                                        <span className="text-purple-500"> const </span>
-                                        <span className="text-blue-600 ml-1"> amount </span>
+                                        <span className="text-purple-400"> const </span>
+                                        <span className="text-blue-400 ml-1"> amount </span>
                                         <span className="text-gray-400 ml-1"> = </span>
-                                        <span className="text-amber-600 ml-1">{finalAmount || '?'}</span>
+                                        <span className="text-amber-400 ml-1">{finalAmount || '?'}</span>
                                         <span className="text-gray-400">;</span>
                                         <span className="text-gray-400 ml-3 text-xs italic">{'// ₹ INR'}</span>
                                     </p>
@@ -427,8 +431,8 @@ export default function Donate() {
                                                 whileTap={{ scale: 0.95 }}
                                                 onClick={() => handleSelectPreset(amt)}
                                                 className={`py-2.5 rounded-sm text-sm font-extrabold transition-all cursor-pointer ${!isCustom && selectedAmount === amt
-                                                    ? 'bg-emerald-500/15 text-gray-600 border border-green-500'
-                                                    : 'bg-gray-50 text-gray-400 hover:bg-gray-100 border border-gray-200 hover:text-gray-600'
+                                                    ? 'bg-[#685AFF]/30 text-gray-600 border border-[#685AFF]'
+                                                    : 'bg-[#121212] text-gray-400 hover:bg-[#121212] border border-gray-600 hover:text-gray-600'
                                                     }`}
                                             >
                                                 ₹{amt}
@@ -439,8 +443,8 @@ export default function Donate() {
                                             whileTap={{ scale: 0.95 }}
                                             onClick={handleCustom}
                                             className={`py-2.5 rounded-sm text-sm font-extrabold transition-all cursor-pointer ${isCustom
-                                                ? 'bg-emerald-500/15 text-gray-600 border border-green-500'
-                                                : 'bg-gray-50 text-gray-400 hover:bg-gray-100 border border-gray-200 hover:text-gray-600'
+                                                ? 'bg-[#685AFF]/30 text-gray-600 border border-[#685AFF]'
+                                                : 'bg-[#121212] text-gray-400 hover:bg-[#121212] border border-gray-600 hover:text-gray-600'
                                                 }`}
                                         >
                                             Custom
@@ -458,8 +462,8 @@ export default function Donate() {
                                                 className="overflow-hidden mb-2"
                                             >
                                                 <p className="h-6.5 flex items-center mb-1">
-                                                    <span className="text-purple-500">let</span>
-                                                    <span className="text-blue-600"> customAmount</span>
+                                                    <span className="text-purple-400">let</span>
+                                                    <span className="text-blue-400"> customAmount</span>
                                                     <span className="text-gray-400"> = </span>
                                                 </p>
                                                 <input
@@ -469,7 +473,7 @@ export default function Donate() {
                                                     value={customAmount}
                                                     onChange={(e) => setCustomAmount(e.target.value)}
                                                     placeholder="10"
-                                                    className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-amber-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all"
+                                                    className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-amber-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-[#685AFF] focus:ring-1 focus:[#685AFF] transition-all"
                                                 />
                                             </motion.div>
                                         )}
@@ -485,8 +489,8 @@ export default function Donate() {
 
                                     {/* Line 7: const donor = { */}
                                     <p className="h-6.5 flex items-center">
-                                        <span className="text-purple-500">const</span>
-                                        <span className="text-blue-600 ml-1"> donor</span>
+                                        <span className="text-purple-400">const</span>
+                                        <span className="text-blue-400 ml-1"> donor</span>
                                         <span className="text-gray-400 ml-1"> = </span>
                                         <span className="text-gray-800 ml-1">{'{'}</span>
                                     </p>
@@ -494,7 +498,7 @@ export default function Donate() {
                                     {/* Line 8: name field */}
                                     <div className="pl-5 mb-1">
                                         <p className="h-6.5 flex items-center">
-                                            <span className="text-blue-600">name</span>
+                                            <span className="text-blue-400">name</span>
                                             <span className="text-gray-400">: </span>
                                         </p>
                                         <input
@@ -503,14 +507,14 @@ export default function Donate() {
                                             onChange={(e) => setName(e.target.value)}
                                             placeholder='"Anonymous"'
                                             maxLength={100}
-                                            className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-green-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all"
+                                            className="w-full px-3 py-2 rounded border border-gray-800 bg-[#1c1c1c] text-[#685AFF] text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-[#685AFF] focus:ring-1 focus:ring-[#685AFF] transition-all"
                                         />
                                     </div>
 
                                     {/* Line 9: message field */}
                                     <div className="pl-5 mt-2 mb-1">
                                         <p className="h-6.5 flex items-center">
-                                            <span className="text-blue-600">message</span>
+                                            <span className="text-blue-400">message</span>
                                             <span className="text-gray-400">: </span>
                                         </p>
                                         <textarea
@@ -519,7 +523,7 @@ export default function Donate() {
                                             placeholder='"your message here..."'
                                             maxLength={500}
                                             rows={2}
-                                            className="w-full px-3 py-2 rounded border border-gray-200 bg-gray-50 text-green-600 text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-green-400 focus:ring-1 focus:ring-green-400/25 transition-all resize-none"
+                                            className="w-full px-3 py-2 rounded border border-gray-800 bg-[#1c1c1c] text-[#685AFF] text-sm font-mono placeholder-gray-300 focus:outline-none focus:border-[#685AFF] focus:ring-1 focus:ring-[#685AFF] transition-all resize-none"
                                         />
                                     </div>
 
@@ -552,7 +556,7 @@ export default function Donate() {
                                         whileTap={{ scale: 0.98 }}
                                         onClick={handlePay}
                                         disabled={status === 'loading' || (isCustom && (!customAmount || Number(customAmount) < 10))}
-                                        className="w-full py-3 rounded border border-green-300 bg-green-50 text-left font-mono text-sm flex items-center justify-center gap-1 transition-all hover:bg-green-100 hover:border-green-400 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                                        className="w-full py-3 rounded border bg-[#1c1c1c] text-left font-mono text-sm flex items-center justify-center gap-1 hover:bg-[#685AFF] hover:border-[#685AFF] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                                     >
                                         {status === 'loading' ? (
                                             <>
@@ -561,10 +565,10 @@ export default function Donate() {
                                             </>
                                         ) : (
                                             <>
-                                                <span className="text-purple-500">await</span>
-                                                <span className="text-blue-600 ml-1">razorpay</span>
+                                                <span className="text-purple-400">await</span>
+                                                <span className="text-blue-400 ml-1">razorpay</span>
                                                 <span className="text-gray-800">.</span>
-                                                <span className="text-amber-600">pay</span>
+                                                <span className="text-amber-400">pay</span>
                                                 <span className="text-gray-800">(</span>
                                                 <span className="text-emerald-400 flex gap-2">₹{finalAmount || '?'}</span>
                                                 <span className="text-gray-800">)</span>
@@ -584,7 +588,7 @@ export default function Donate() {
                                     {/* Recent supporters ticker */}
                                     {supporters.length > 0 && (
                                         <div className="mt-4 pt-4 border-t border-gray-100">
-                                            <p className="text-gray-600 text-xs italic h-6.5 flex items-center mb-1">
+                                            <p className="text-gray-600 text-xs italic flex items-center mb-1">
                                                 {'// '} recent supporters
                                             </p>
                                             <SupporterTicker supporters={supporters} />

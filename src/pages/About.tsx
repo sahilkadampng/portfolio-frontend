@@ -22,13 +22,13 @@ export default function About() {
             <Navbar />
             <main className="bg-[#f4f6fb] min-h-screen">
                 {/* Hero section */}
-                <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
-                    <div className="max-w-6xl mx-auto text-center">
+                <section className="pt-32 pb-16 sm:pb-20 px-4 sm:px-6 bg-[#121212]">
+                    <div className="max-w-6xl mx-auto text-cente">
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-blue-600 uppercase mb-6"
+                            className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-[#685AFF] uppercase mb-6"
                         >
                             ● About :: Overview ●
                         </motion.p>
@@ -36,11 +36,11 @@ export default function About() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.1 }}
-                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 uppercase leading-tight tracking-tight"
+                            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-gray-100 uppercase leading-tight tracking-tight"
                         >
                             The Developer
                             <br />
-                            <span className="text-blue-600 italic">Behind RAW.</span>
+                            <span className="text-[#685AFF]">Behind RAW.</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -65,8 +65,8 @@ export default function About() {
                                 { value: 'Backend', label: 'Focus' },
                                 { value: '2024', label: 'Started' },
                             ].map((stat) => (
-                                <div key={stat.label} className="px-6 sm:px-10 py-2 text-center">
-                                    <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</p>
+                                <div key={stat.label} className="px-5 sm:px-10 py-2 text-center">
+                                    <p className="text-2xl sm:text-3xl font-bold text-gray-100">{stat.value}</p>
                                     <p className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-400 uppercase mt-1">
                                         {stat.label}
                                     </p>
@@ -77,16 +77,16 @@ export default function About() {
                 </section>
 
                 {/* Bio card */}
-                <section className="px-4 sm:px-6 pb-16">
+                <section className="px-4 sm:px-6 pb-16 bg-[#121212]">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7 }}
-                        className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-xl p-8 sm:p-12"
+                        className="max-w-4xl mx-auto bg-[#181818] border border-gray-600 rounded-xl p-8 sm:p-12"
                     >
-                        <div className="flex items-center justify-between mb-6">
-                            <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase">
+                        <div className="flex items-center justify-between mb-6 sm:px-2">
+                            <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase">
                                 Profile :: Summary
                             </span>
                             <span className="flex items-center gap-2 text-xs font-mono text-gray-400">
@@ -94,7 +94,7 @@ export default function About() {
                                 AVAILABLE FOR WORK
                             </span>
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 uppercase tracking-tight mb-4">
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-[#685AFF] uppercase tracking-tight mb-4">
                             Sahil Kadam
                         </h3>
                         <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-4">
@@ -108,7 +108,7 @@ export default function About() {
                         </p>
                         <div className="mt-6 flex flex-wrap gap-2">
                             {['Node.js', 'Express', 'MongoDB', 'React', 'TypeScript', 'Tailwind CSS', 'Git'].map((tag) => (
-                                <span key={tag} className="px-3 py-1 border border-gray-200 rounded-md font-mono text-[10px] sm:text-xs tracking-wider text-gray-600 uppercase">
+                                <span key={tag} className="px-3 py-1 border border-gray-600 rounded-md font-mono text-[10px] sm:text-xs tracking-wider text-gray-600 uppercase">
                                     {tag}
                                 </span>
                             ))}
@@ -117,14 +117,14 @@ export default function About() {
                 </section>
 
                 {/* Timeline */}
-                <section className="px-4 sm:px-6 pb-20">
+                <section className="pt-32 px-4 sm:px-6 pb-20 bg-[#1c1c1c]">
                     <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-12">
-                            <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-4">
+                            <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase mb-8">
                                 Journey :: Timeline
                             </p>
-                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
-                                The Path <span className="text-blue-600 italic">So Far.</span>
+                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-100 uppercase tracking-tight">
+                                The Path <span className="text-[#685AFF]">So Far.</span>
                             </h2>
                         </div>
 
@@ -136,7 +136,7 @@ export default function About() {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 flex gap-6 items-start hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    className="bg-[#121212] border border-gray-700 rounded-xl p-6 sm:p-8 flex gap-6 items-start hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                                 >
                                     <div className="flex flex-col items-center shrink-0">
                                         <span className={`w-3 h-3 rounded-full ${i === timeline.length - 1 ? 'bg-blue-600' : 'bg-gray-300'}`} />
@@ -144,8 +144,8 @@ export default function About() {
                                     </div>
                                     <div>
                                         <span className="font-mono text-[10px] tracking-wider text-gray-400 uppercase">{item.year}</span>
-                                        <h3 className="text-lg font-extrabold text-gray-900 tracking-tight mt-1 mb-2">{item.title}</h3>
-                                        <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                                        <h3 className="text-lg font-extrabold text-[#685AFF] tracking-tight mt-1 mb-2">{item.title}</h3>
+                                        <p className="text-gray-300 text-sm leading-relaxed">{item.desc}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -154,14 +154,14 @@ export default function About() {
                 </section>
 
                 {/* Values */}
-                <section className="px-4 sm:px-6 pb-20">
+                <section className="pt-32 px-4 sm:px-6 pb-20 bg-[#121212]">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-12">
                             <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-gray-400 uppercase mb-4">
                                 Core :: Principles
                             </p>
-                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
-                                How I <span className="text-blue-600 italic">Build.</span>
+                            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-100 uppercase tracking-tight">
+                                How I <span className="text-[#685AFF]">Build.</span>
                             </h2>
                         </div>
 
@@ -173,20 +173,20 @@ export default function About() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    className="bg-[#1c1c1c] border border-gray-700 rounded-xl p-6 sm:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                                 >
                                     <div className="flex items-center justify-between mb-4">
-                                        <span className="font-mono text-[10px] tracking-wider text-blue-600 uppercase">{v.label}</span>
+                                        <span className="font-mono text-[10px] tracking-wider text-[#685AFF] uppercase">{v.label}</span>
                                         <span className="font-mono text-xs text-gray-300">{String(i + 1).padStart(2, '0')}</span>
                                     </div>
-                                    <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
+                                    <p className="text-gray-200 text-sm leading-relaxed">{v.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
 
                         {/* Divider */}
-                        <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" />
-                        <p className="mt-8 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-blue-600 uppercase">
+                        {/* <div className="mt-16 h-px w-full bg-linear-to-r from-transparent via-gray-300 to-transparent" /> */}
+                        <p className="mt-8 text-center font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#685AFF] uppercase">
                             Built from scratch. Shipping with intent.
                         </p>
                     </div>

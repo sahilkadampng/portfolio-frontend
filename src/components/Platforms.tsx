@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import Noise from '../components/noise'
+// import Noise from '../components/noise'
 
 export default function Platforms() {
     return (
         <section className="relative py-20 sm:py-28 px-4 overflow-hidden w-full sm:px-6 bg-[#111214]">
             <div className="max-w-6xl mx-auto text-center">
                 <div className="max-w-6xl mx-auto text-center">
-                    <Noise />
+                    {/* <Noise /> */}
                     {/* Badge */}
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -73,7 +73,7 @@ export default function Platforms() {
                 </div>
 
                 {/* Cards */}
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 lg:mb-0">
                     {/* Card 1 */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -81,7 +81,7 @@ export default function Platforms() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="bg-[#06080b] border border-gray-900 rounded-xl p-6 sm:p-8 text-left flex flex-col justify-between min-h-70 hover:shadow-lg hover:border-[#685AFF]"
-                    ><div className="-mt-8.5 h-px w-full bg-linear-to-r from-transparent via-[#685AFF] to-transparent" />
+                    ><div className="-mt-6 lg:-mt-8 h-px w-full bg-linear-to-r from-transparent via-[#685AFF] to-transparent" />
                         <div>
                             <div className="flex items-center justify-between mb-6">
                                 <span className="font-mono text-[10px] sm:text-xs tracking-wider text-gray-500 uppercase">
